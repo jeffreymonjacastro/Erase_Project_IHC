@@ -1,0 +1,93 @@
+# This .gitignore file should be placed at the root of your Unity project directory
+#
+# Directorios y archivos de caché y temporales de Unity
+# **Estos son esenciales para ignorar**
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/ # Capturas de memoria
+/[Rr]ecordings/     # Grabaciones
+.utmp/
+*.log
+
+# Archivos auto-generados y de la Asset Store
+/[Aa]ssets/AssetStoreTools*
+
+# Archivos de Assets (Blender, etc.)
+# Ignorar archivos temporales de Blender (.blend1)
+*.blend1
+*.blend1.meta
+
+# Archivos de soluciones IDE (Visual Studio, Rider, etc.)
+.vs/                   # Visual Studio cache directory
+.gradle/               # Gradle cache directory (para Android)
+/[Aa]ssets/Plugins/Editor/JetBrains* # Autogenerado por Rider
+*.DotSettings.user     # Configuración personal de Rider
+
+# Archivos de proyecto y solución auto-generados
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Metadatos generados por Unity para archivos de depuración
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Archivos generados en fallos (Crashes)
+sysinfo.txt
+mono_crash.*
+crashlytics-build.properties
+
+# Builds y paquetes binarios
+*.apk
+*.aab
+*.unitypackage
+*.unitypackage.meta
+*.app
+
+# Archivos de prueba (TestRunner)
+InitTestScene*.unity*
+/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Addressables (Archivos de caché y compilación)
+/ServerData
+/[Aa]ssets/StreamingAssets/aa*
+/[Aa]ssets/AddressableAssetsData/link.xml*
+/[Aa]ssets/Addressables_Temp*
+/[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# Visual Scripting (Archivos auto-generados)
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+
+# Archivos de sistema operativos
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+.vs/
+
+# Archivos .meta (¡IMPORTANTE! NO IGNORAR LOS .meta de los assets, solo los de caché)
+# Los .meta de los assets son necesarios para que Unity sepa cómo configurar los archivos.
+# Por eso, solo ignoramos los .meta de los archivos ya ignorados arriba (*.pidb.meta, etc.)
