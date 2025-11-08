@@ -1,3 +1,18 @@
+# ===============================================
+# Reglas de Unity para Fusión (Merge) de Texto
+# ===============================================
+# Estos son los archivos que queremos fusionar con UnityYAMLMerge.
+# ¡¡NO DEBEN ESTAR EN LFS!!
+*.unity merge=unityyamlmerge text=auto
+*.prefab merge=unityyamlmerge text=auto
+*.asset merge=unityyamlmerge text=auto
+*.mat merge=unityyamlmerge text=auto
+
+
+# ===============================================
+# Reglas de Git LFS para Archivos Binarios
+# ===============================================
+# Imágenes
 *.png filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
@@ -5,24 +20,28 @@
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
 *.tiff filter=lfs diff=lfs merge=lfs -text
+
+# Modelos 3D
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.obj filter=lfs diff=lfs merge=lfs -text
 *.blend filter=lfs diff=lfs merge=lfs -text
 *.dae filter=lfs diff=lfs merge=lfs -text
+
+# Audio y Video
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
+
+# Otros Binarios
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
 *.ttf filter=lfs diff=lfs merge=lfs -text
 *.otf filter=lfs diff=lfs merge=lfs -text
 *.bytes filter=lfs diff=lfs merge=lfs -text
 *.dll filter=lfs diff=lfs merge=lfs -text
 *.so filter=lfs diff=lfs merge=lfs -text
-*.unity filter=lfs diff=lfs merge=lfs -text
-*.prefab filter=lfs diff=lfs merge=lfs -text
+
+# Archivos de datos de Unity (Binarios)
 *LightingData.asset filter=lfs diff=lfs merge=lfs -text
-*.mat filter=lfs diff=lfs merge=lfs -text
 *.lighting filter=lfs diff=lfs merge=lfs -text
-*.asset filter=lfs diff=lfs merge=lfs -text
