@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/entregable1.unity
     guid: 3c091fbe1cf7b164b94ca2292325a8aa
+  - enabled: 0
+    path: "Assets/Samples/Meta XR Interaction \u200BSDK/78.0.0/Example Scenes/ComprehensiveRigExample.unity"
+    guid: 2efe93cb8972cae439bfba2dcd4165f0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e7fea1e8c1295954b83c1cac678801ce, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f07512db6426b47489eb3965ee658658, type: 2}
