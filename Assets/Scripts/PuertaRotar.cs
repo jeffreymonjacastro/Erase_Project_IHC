@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class PuertaRotar : MonoBehaviour
 {
-    // Este script está en el HIJO (Cube_10)
-
+    // Este script está en el HIJO (por ejemplo, Cube_10)
     public float anguloApertura = 90.0f;
     public float velocidadSuavizado = 2.0f;
 
     private Quaternion _rotacionCerrada;
-    private Quaternion _rotacionAbierta;
+    private Quaternion _rotacionAbiertaAfuera;
+    private Quaternion _rotacionAbiertaAdentro;
     private bool _abrir = false;
 
-    // Necesitamos una referencia al padre para leer los Triggers
     private PuertaTrigger trigger;
 
     void Start()
@@ -23,19 +22,31 @@ public class PuertaRotar : MonoBehaviour
             Debug.LogError("No se encontró el script 'PuertaTrigger' en el padre!");
         }
 
-        // Guarda la rotación LOCAL inicial
+        // Guarda la rotación LOCAL inicial (puerta cerrada)
         _rotacionCerrada = transform.localRotation;
-        _rotacionAbierta = _rotacionCerrada * Quaternion.Euler(0, anguloApertura, 0);
+
+        // Calcula las dos posibles aperturas (hacia afuera e hacia adentro)
+        _rotacionAbiertaAfuera = _rotacionCerrada * Quaternion.Euler(0, anguloApertura, 0);
+        _rotacionAbiertaAdentro = _rotacionCerrada * Quaternion.Euler(0, -anguloApertura, 0);
     }
 
     void Update()
     {
-        // Pregunta al script del padre si debe abrirse
         _abrir = trigger.debeAbrirse;
 
-        Quaternion rotacionObjetivo = _abrir ? _rotacionAbierta : _rotacionCerrada;
+        // Elegir la rotación objetivo según desde qué lado se entra
+        Quaternion rotacionObjetivo;
 
-        // Rota este objeto (Cube_10) sobre su propio eje local
+        if (_abrir)
+        {
+            rotacionObjetivo = trigger.abrirHaciaAfuera ? _rotacionAbiertaAfuera : _rotacionAbiertaAdentro;
+        }
+        else
+        {
+            rotacionObjetivo = _rotacionCerrada;
+        }
+
+        // Interpolamos suavemente
         transform.localRotation = Quaternion.Slerp(
             transform.localRotation,
             rotacionObjetivo,
