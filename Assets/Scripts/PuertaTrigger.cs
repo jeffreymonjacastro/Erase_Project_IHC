@@ -14,6 +14,7 @@ public class PuertaTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+             
             jugador = other.transform;
             debeAbrirse = true;
 
