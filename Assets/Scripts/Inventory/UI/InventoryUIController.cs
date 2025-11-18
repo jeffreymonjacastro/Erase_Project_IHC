@@ -2,14 +2,26 @@ using UnityEngine;
 
 public class InventoryUIController : MonoBehaviour
 {
+    [Header("Root")]
+    [Tooltip("Root object to enable/disable. Usually the InventoryPanel.")]
+    public GameObject root;
+
     public InventoryController inventory;
     public Transform slotContainer;     // the Grid transform
     public GameObject slotPrefab;       // the Slot prefab
-
-    [Header("Details")]
-    public ItemDetailsController detailsController;
+    
+    public InventoryScreenController screenController;
 
     private InventorySlot[] slotsUI;
+
+    private void Awake()
+    {
+        // If root is not assigned, assume this GameObject is the root.
+        if (root == null)
+        {
+            root = gameObject;
+        }
+    }
 
     private void Start()
     {
@@ -31,7 +43,7 @@ public class InventoryUIController : MonoBehaviour
         {
             GameObject slotObj = Instantiate(slotPrefab, slotContainer);
             InventorySlot slot = slotObj.GetComponent<InventorySlot>();
-            slot.Initialize(i, detailsController);
+            slot.Initialize(i, screenController);
 
             slotsUI[i] = slot;
         }
@@ -45,5 +57,15 @@ public class InventoryUIController : MonoBehaviour
         {
             slotsUI[i].SetItem(items[i]);
         }
+    }
+
+    public void Show()
+    {
+        root.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        root.SetActive(false);
     }
 }

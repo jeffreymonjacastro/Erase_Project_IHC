@@ -59,6 +59,10 @@ public class ItemDetailsController : MonoBehaviour
 
         root.SetActive(true);
     }
+    public void Close()
+    {
+        Hide();
+    }
 
     public void Hide()
     {

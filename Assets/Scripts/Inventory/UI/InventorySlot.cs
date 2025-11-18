@@ -6,15 +6,15 @@ public class InventorySlot : MonoBehaviour
     [Header("UI")]
     public Image iconImage;
 
-    private ItemDetailsController detailsController;
+    private InventoryScreenController screen;
 
     private ItemData currentItem;
     private int slotIndex;
     
-    public void Initialize(int index, ItemDetailsController details)
+    public void Initialize(int index, InventoryScreenController screenController)
     {
         slotIndex = index;
-        detailsController = details;
+        screen = screenController;
         Clear();
     }
 
@@ -45,19 +45,14 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.Log($"[InventorySlot] Clicked slot {slotIndex}, item: {currentItem.id}");
 
-            if (detailsController != null)
+            if (screen != null)
             {
-                detailsController.ShowItem(currentItem);
+                screen.ShowDetails(currentItem);
             }
         }
         else
         {
             Debug.Log($"[InventorySlot] Clicked empty slot {slotIndex}");
-
-            if (detailsController != null)
-            {
-                detailsController.Hide();
-            }
         }
     }
 }
