@@ -2077,7 +2077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c69c0dae0786bb448b9724474481966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 9
+  capacity: 18
   slots: []
 --- !u!4 &75675600
 Transform:
@@ -70178,6 +70178,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1522397133}
     m_Modifications:
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_Spacing.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_Spacing.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_CellSize.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_CellSize.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 546099067949947521, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1035379127397734791, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
       propertyPath: m_Name
       value: InventoryCanvas_VR
@@ -70270,6 +70298,30 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 653192280}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107224315577827251, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7999946316098188615, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
