@@ -1,26 +1,39 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class SimpleLaserPointer : MonoBehaviour
 {
-    public LineRenderer line;
+    [Tooltip("How far the laser goes in front of the controller.")]
+    public float length = 5f;
 
-    void Start()
+    private LineRenderer line;
+
+    private void Awake()
     {
-        if (line == null)
+        line = GetComponent<LineRenderer>();
+
+        // basic setup
+        line.useWorldSpace = true;
+        line.positionCount = 2;
+
+        // nice thin beam
+        line.startWidth = 0.005f;
+        line.endWidth = 0.005f;
+
+        // simple material so it isn't magenta
+        if (line.material == null)
         {
-            line = gameObject.AddComponent<LineRenderer>();
-            line.startWidth = 0.01f;
-            line.endWidth = 0.005f;
-            line.positionCount = 2;
-            line.material = new Material(Shader.Find("Sprites/Default"));
-            line.startColor = Color.white;
-            line.endColor = Color.white;
+            line.material = new Material(Shader.Find("Unlit/Color"));
+            line.material.color = Color.white;
         }
     }
 
-    void Update()
+    private void Update()
     {
-        line.SetPosition(0, transform.position);
-        line.SetPosition(1, transform.position + transform.forward * 5f);
+        Vector3 start = transform.position;
+        Vector3 end = transform.position + transform.forward * length;
+
+        line.SetPosition(0, start);
+        line.SetPosition(1, end);
     }
 }
