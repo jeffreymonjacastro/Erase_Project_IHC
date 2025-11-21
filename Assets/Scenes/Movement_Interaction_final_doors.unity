@@ -2078,7 +2078,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capacity: 18
-  slots: []
 --- !u!4 &75675600
 Transform:
   m_ObjectHideFlags: 0
@@ -43071,7 +43070,7 @@ MonoBehaviour:
   m_SendPointerHoverToParent: 1
   rayTransform: {fileID: 989334441}
   m_Cursor: {fileID: 0}
-  joyPadClickButton: 1
+  joyPadClickButton: 8192
   gazeClickKey: 32
   performSphereCastForGazepointer: 0
   useRightStickScroll: 1
@@ -70561,6 +70560,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5530999103395190430, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: laserPointer
+      value: 
+      objectReference: {fileID: 989334442}
     - target: {fileID: 5595808062174052534, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
       propertyPath: m_Camera
       value: 

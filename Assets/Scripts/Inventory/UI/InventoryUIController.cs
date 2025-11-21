@@ -4,13 +4,15 @@ public class InventoryUIController : MonoBehaviour
 {
     [Header("Root")]
     [Tooltip("Root object to enable/disable. Usually the InventoryPanel.")]
-    public GameObject root;
+    [SerializeField] private GameObject root;
 
-    public InventoryController inventory;
-    public Transform slotContainer;     // the Grid transform
-    public GameObject slotPrefab;       // the Slot prefab
-    
-    public InventoryScreenController screenController;
+    [Header("UI References")]
+    [SerializeField] private Transform slotContainer;     // the Grid transform
+    [SerializeField] private GameObject slotPrefab;       // the Slot prefab
+
+    [Header("Controllers")]
+    [SerializeField] private InventoryController inventory;
+    [SerializeField] private InventoryScreenController screenController;
 
     private InventorySlot[] slotsUI;
 
@@ -20,6 +22,26 @@ public class InventoryUIController : MonoBehaviour
         if (root == null)
         {
             root = gameObject;
+        }
+
+        if (inventory == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: inventory");
+        }
+
+        if (slotContainer == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: slot container");
+        }
+
+        if (slotPrefab == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: slot prefab");
+        }
+
+        if (screenController == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: screen controller");
         }
     }
 

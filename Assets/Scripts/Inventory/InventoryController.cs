@@ -8,7 +8,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int capacity = 12;
 
     [Tooltip("Slots will be auto-sized to Capacity in Awake.")]
-    [SerializeField] private ItemData[] slots;
+    private ItemData[] slots;
 
     public int Capacity => capacity;
     public IReadOnlyList<ItemData> Slots => slots;
@@ -46,9 +46,6 @@ public class InventoryController : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Removes the item at the given index (if any).
-    /// </summary>
     public void RemoveItem(int index)
     {
         if (!IsValidIndex(index))
@@ -65,18 +62,12 @@ public class InventoryController : MonoBehaviour
         slots[index] = null;
     }
 
-    /// <summary>
-    /// Returns the item at the given index, or null if empty/invalid.
-    /// </summary>
     public ItemData GetItem(int index)
     {
         if (!IsValidIndex(index)) return null;
         return slots[index];
     }
 
-    /// <summary>
-    /// Clears all slots.
-    /// </summary>
     public void Clear()
     {
         for (int i = 0; i < slots.Length; i++)

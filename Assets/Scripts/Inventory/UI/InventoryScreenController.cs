@@ -1,25 +1,90 @@
+using System;
 using UnityEngine;
 
 public class InventoryScreenController : MonoBehaviour
 {
-    public InventoryUIController inventory;
-    public ItemDetailsController details;
+    [Header("Panels")]
+    [SerializeField] private InventoryUIController inventory;
+    [SerializeField] private ItemDetailsController details;
 
+    [Header("VR")]
+    [Tooltip("Optional: assign to enable a laser pointer when UI is open.")]
+    [SerializeField] private SimpleLaserPointer laserPointer;
+
+    private bool isOpen;
+    private bool showInventory;
+
+    private void Awake()
+    {
+        if (inventory == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: inventory");
+        }
+
+        if (details == null)
+        {
+            Debug.LogError("[InventoryScreenController] Missing reference: details");
+        }
+
+        isOpen = false;
+        showInventory = true;
+        HideAll();
+    }
+
+    private void Update()
+    {
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            if (isOpen)
+            {
+                HideAll();
+                SetLaserActive(false);
+            }
+            else
+            {
+                if (showInventory || !ShowDetails())
+                {
+                    showInventory = true;
+                    ShowInventory();
+                }
+                else
+                {
+                    ShowDetails();
+                }
+                SetLaserActive(true);
+            }
+            isOpen = !isOpen;
+        }
+    }
+
+    public void HideAll()
+    {
+        inventory.Hide();
+        details.Hide();
+    }
+
+    private void SetLaserActive(bool active)
+    {
+        if (laserPointer != null)
+        {
+            laserPointer.SetActive(active);
+        }
+    }
 
     public void ShowInventory()
     {
-        if (inventory != null && details != null)
-        {
-            details.Hide();
-            inventory.Show();
-        }
+        details.Hide();
+        inventory.Show();
     }
+    public bool ShowDetails()
+    {
+        inventory.Hide();
+        return details.ShowItem();
+    }
+
     public void ShowDetails(ItemData item)
     {
-        if (inventory != null && details != null)
-        {
-            inventory.Hide();
-            details.ShowItem(item);
-        }
+        inventory.Hide();
+        details.ShowItem(item);
     }
 }

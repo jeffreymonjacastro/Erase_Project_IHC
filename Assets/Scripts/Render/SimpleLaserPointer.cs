@@ -8,6 +8,8 @@ public class SimpleLaserPointer : MonoBehaviour
 
     private LineRenderer line;
 
+    private bool active;
+
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
@@ -26,14 +28,26 @@ public class SimpleLaserPointer : MonoBehaviour
             line.material = new Material(Shader.Find("Unlit/Color"));
             line.material.color = Color.white;
         }
+
+        active = false;
+        line.enabled = active;
     }
 
     private void Update()
     {
-        Vector3 start = transform.position;
-        Vector3 end = transform.position + transform.forward * length;
+        if (active)
+        {
+            Vector3 start = transform.position;
+            Vector3 end = transform.position + transform.forward * length;
 
-        line.SetPosition(0, start);
-        line.SetPosition(1, end);
+            line.SetPosition(0, start);
+            line.SetPosition(1, end);
+        }
+    }
+
+    public void SetActive(bool active)
+    {
+        this.active = active;
+        line.enabled = active;
     }
 }
