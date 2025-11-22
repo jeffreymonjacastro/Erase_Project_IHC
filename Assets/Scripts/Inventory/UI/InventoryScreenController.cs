@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryScreenController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class InventoryScreenController : MonoBehaviour
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        if (OVRInput.GetDown(OVRInput.RawButton.B))
         {
             if (isOpen)
             {
