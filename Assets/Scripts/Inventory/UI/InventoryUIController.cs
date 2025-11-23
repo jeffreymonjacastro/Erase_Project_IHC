@@ -26,22 +26,22 @@ public class InventoryUIController : MonoBehaviour
 
         if (inventory == null)
         {
-            Debug.LogError("[InventoryScreenController] Missing reference: inventory");
+            Debug.LogError("[InventoryUIController] Missing reference: inventory");
         }
 
         if (slotContainer == null)
         {
-            Debug.LogError("[InventoryScreenController] Missing reference: slot container");
+            Debug.LogError("[InventoryUIController] Missing reference: slot container");
         }
 
         if (slotPrefab == null)
         {
-            Debug.LogError("[InventoryScreenController] Missing reference: slot prefab");
+            Debug.LogError("[InventoryUIController] Missing reference: slot prefab");
         }
 
         if (screenController == null)
         {
-            Debug.LogError("[InventoryScreenController] Missing reference: screen controller");
+            Debug.LogError("[InventoryUIController] Missing reference: screen controller");
         }
     }
 
