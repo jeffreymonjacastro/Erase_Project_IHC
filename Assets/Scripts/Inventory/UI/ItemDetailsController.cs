@@ -1,6 +1,7 @@
+using Oculus.Interaction;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ItemDetailsController : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class ItemDetailsController : MonoBehaviour
     public Image descriptionImage;
     public TMP_Text descriptionText;
 
+    [Header("Controllers")]
+    [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private EquipmentController equipmentController;
+    [SerializeField] private InventoryScreenController screenController;
+
     private ItemData currentItem;
 
     private void Awake()
@@ -23,10 +29,39 @@ public class ItemDetailsController : MonoBehaviour
             root = gameObject;
         }
 
+        if (inventoryController == null)
+        {
+            Debug.LogError("[ItemDetailsController] Missing reference: inventory controller");
+        }
+
+        if (equipmentController == null)
+        {
+            Debug.LogError("[ItemDetailsController] Missing reference: equipment controller");
+        }
+
+        if (screenController == null)
+        {
+            Debug.LogError("[ItemDetailsController] Missing reference: screen controller");
+        }
+
         Hide();
     }
 
-    public bool ShowItem()
+    public void OnEquipPressed()
+    {
+        if (currentItem == null) return;
+
+        equipmentController.Equip(currentItem);
+
+        inventoryController.RemoveItem(currentItem);
+
+        currentItem = null;
+        ShowItem();
+
+        screenController.HideAll();
+    }
+    
+    public bool ShowItem() 
     {
         if (currentItem == null)
         {
