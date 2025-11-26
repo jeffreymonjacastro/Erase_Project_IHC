@@ -70577,6 +70577,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 75675599}
+    - target: {fileID: 4715650309042467135, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+      propertyPath: equipmentController
+      value: 
+      objectReference: {fileID: 357038490}
     - target: {fileID: 5314156790642268817, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
