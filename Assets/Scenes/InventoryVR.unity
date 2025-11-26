@@ -10852,6 +10852,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &357038490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328712326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a71c3d7f301c4e469fbc13631d5f958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHandAnchor: {fileID: 989334441}
+  inventoryController: {fileID: 75675599}
+  screenController: {fileID: 1589865492}
 --- !u!1 &360421003 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1844930292423774, guid: 991e8973513e2ad408232c1afeb3a9df, type: 3}
@@ -32588,12 +32603,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1589865491}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: ItemDetailsController, Assembly-CSharp
+        m_MethodName: OnEquipPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -56297,6 +56312,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4293850495013322, guid: 685803a48200879419cbf0f982932eb1, type: 3}
   m_PrefabInstance: {fileID: 1323339968}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1328712326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1876285864150506021, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+  m_PrefabInstance: {fileID: 2041321517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1333709200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70668,11 +70688,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5689943020011680162, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
   m_PrefabInstance: {fileID: 1589865488}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1589865491 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1253575692847954573, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+--- !u!114 &1589865491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4715650309042467135, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
   m_PrefabInstance: {fileID: 1589865488}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c205fb87a0880b4291c498e67aa94cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1589865492 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5530999103395190430, guid: 363c7fde1c86e6e4c8f81d15c295d7b7, type: 3}
+  m_PrefabInstance: {fileID: 1589865488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ed982c766f55d4abd5fdd452da8cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1590174934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99850,6 +99887,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6862652505350785071, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1510855269}
+    - targetCorrespondingSourceObject: {fileID: 1876285864150506021, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 357038490}
     - targetCorrespondingSourceObject: {fileID: 6118531210901127039, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2134571832}
@@ -99915,6 +99955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHandAnchor: {fileID: 2041321523}
+  inventoryController: {fileID: 0}
+  screenController: {fileID: 0}
 --- !u!114 &2041321525 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6013094194152015643, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}

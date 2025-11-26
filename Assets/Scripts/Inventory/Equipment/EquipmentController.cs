@@ -5,9 +5,26 @@ public class EquipmentController : MonoBehaviour
     [Header("Where equipped items are attached")]
     [SerializeField] private Transform rightHandAnchor;   // e.g. ControllerTouchHandGrabInteractor transform or a child of it
 
+    [Header("Controllers")]
+    [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private InventoryScreenController screenController;
+
     private GameObject currentEquipped;
 
-    public void Equip(ItemData item)
+    private void Awake()
+    {
+        if (inventoryController == null)
+        {
+            Debug.LogError("[ItemDetailsController] Missing reference: inventory controller");
+        }
+
+        if (screenController == null)
+        {
+            Debug.LogError("[ItemDetailsController] Missing reference: screen controller");
+        }
+    }
+
+    public void Equip(ItemData item, int index)
     {
         Unequip();
 
@@ -16,6 +33,10 @@ public class EquipmentController : MonoBehaviour
             Debug.LogError("Equip called with null item or prefab");
             return;
         }
+
+        inventoryController.RemoveItem(index);
+
+        screenController.HideAll();
 
         // Instantiate as child of the right hand
         currentEquipped = Instantiate(item.prefab, rightHandAnchor);
