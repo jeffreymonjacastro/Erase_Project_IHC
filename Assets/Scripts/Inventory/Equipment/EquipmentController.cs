@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class EquipmentController : MonoBehaviour
 {
+    [Header("Camera")]
+    [SerializeField] private Transform cameraAnchor;      // CenterEyeAnchor
+
     [Header("Where equipped items are attached")]
-    [SerializeField] private Transform rightHandAnchor;   // e.g. ControllerTouchHandGrabInteractor transform or a child of it
+    [SerializeField] private Transform rightHandAnchor;   // e.g. ControllerGrabInteractor transform or a child of it
 
     [Header("Controllers")]
     [SerializeField] private InventoryController inventoryController;
-    [SerializeField] private InventoryScreenController screenController;
+    [SerializeField] private InventoryScreenController screenController;    
 
     private GameObject currentEquipped;
 
     private void Awake()
     {
+        if (cameraAnchor == null)
+        {
+            Debug.LogError("[EquipmentController] Missing reference: camera anchor");
+        }
+
         if (inventoryController == null)
         {
             Debug.LogError("[EquipmentController] Missing reference: inventory controller");
@@ -35,19 +43,15 @@ public class EquipmentController : MonoBehaviour
         }
 
         inventoryController.RemoveItem(index);
-        Debug.LogError("[EquipmentController] Inventory item removed");
+        //Debug.LogError("[EquipmentController] Inventory item removed");
 
         screenController.HideAll();
-        Debug.LogError("[EquipmentController] Screen hidden");
+        //Debug.LogError("[EquipmentController] Screen hidden");
 
-        // Instantiate as child of the right hand
-        currentEquipped = Instantiate(item.prefab, rightHandAnchor);
+        Vector3 spawnPos = cameraAnchor.position + cameraAnchor.forward * 1.0f;
+        Quaternion spawnRot = Quaternion.LookRotation(cameraAnchor.forward, Vector3.up);
 
-        // Reset local transform so it sits at the anchor
-        currentEquipped.transform.localPosition = Vector3.zero;
-        currentEquipped.transform.localRotation = Quaternion.identity;
-
-        // Optional: tweak localPosition/localRotation per item type if needed
+        currentEquipped = Instantiate(item.prefab, spawnPos, spawnRot);
     }
 
     public void Unequip()
