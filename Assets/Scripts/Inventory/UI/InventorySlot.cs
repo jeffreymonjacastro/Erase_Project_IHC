@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
 
             if (screen != null)
             {
-                screen.ShowDetails(currentItem);
+                screen.ShowDetails(currentItem, slotIndex);
             }
         }
         else

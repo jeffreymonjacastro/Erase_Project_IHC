@@ -83,9 +83,9 @@ public class InventoryScreenController : MonoBehaviour
         return details.ShowItem();
     }
 
-    public void ShowDetails(ItemData item)
+    public void ShowDetails(ItemData item, int index)
     {
         inventory.Hide();
-        details.ShowItem(item);
+        details.ShowItem(item, index);
     }
 }

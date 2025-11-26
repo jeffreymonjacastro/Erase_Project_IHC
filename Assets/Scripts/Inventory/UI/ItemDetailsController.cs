@@ -60,9 +60,10 @@ public class ItemDetailsController : MonoBehaviour
         return true;
     }
 
-    public void ShowItem(ItemData item)
+    public void ShowItem(ItemData item, int index)
     {
         currentItem = item;
+        currentItemIndex = index;
 
         if (item == null)
         {
