@@ -15,12 +15,12 @@ public class EquipmentController : MonoBehaviour
     {
         if (inventoryController == null)
         {
-            Debug.LogError("[ItemDetailsController] Missing reference: inventory controller");
+            Debug.LogError("[EquipmentController] Missing reference: inventory controller");
         }
 
         if (screenController == null)
         {
-            Debug.LogError("[ItemDetailsController] Missing reference: screen controller");
+            Debug.LogError("[EquipmentController] Missing reference: screen controller");
         }
     }
 
@@ -35,8 +35,10 @@ public class EquipmentController : MonoBehaviour
         }
 
         inventoryController.RemoveItem(index);
+        Debug.LogError("[EquipmentController] Inventory item removed");
 
         screenController.HideAll();
+        Debug.LogError("[EquipmentController] Screen hidden");
 
         // Instantiate as child of the right hand
         currentEquipped = Instantiate(item.prefab, rightHandAnchor);

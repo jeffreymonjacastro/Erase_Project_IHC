@@ -40,6 +40,7 @@ public class ItemDetailsController : MonoBehaviour
     {
         if (currentItem == null) return;
 
+        Debug.LogWarning($"The index of the selected item is {currentItemIndex}");
         equipmentController.Equip(currentItem, currentItemIndex);
 
         currentItem = null;
