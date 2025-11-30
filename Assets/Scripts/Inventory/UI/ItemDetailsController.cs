@@ -14,7 +14,8 @@ public class ItemDetailsController : MonoBehaviour
     public Image descriptionImage;
     public TMP_Text descriptionText;
 
-    [Header("Controllers")]
+    [Header("Equipable")]
+    [SerializeField] private bool equipable = true;
     [SerializeField] private EquipmentController equipmentController;
 
     private ItemData currentItem;
@@ -28,7 +29,7 @@ public class ItemDetailsController : MonoBehaviour
             root = gameObject;
         }
 
-        if (equipmentController == null)
+        if (equipable && equipmentController == null)
         {
             Debug.LogError("[ItemDetailsController] Missing reference: equipment controller");
         }
@@ -38,13 +39,13 @@ public class ItemDetailsController : MonoBehaviour
 
     public void OnEquipPressed()
     {
-        if (currentItem == null) return;
+        if (currentItem == null || !equipable) return;
 
         Debug.LogWarning($"The index of the selected item is {currentItemIndex}");
         equipmentController.Equip(currentItem, currentItemIndex);
 
         currentItem = null;
-        ShowItem();
+        Hide();
     }
     
     public bool ShowItem() 
@@ -56,7 +57,6 @@ public class ItemDetailsController : MonoBehaviour
         }
 
         ShowData();
-
         return true;
     }
 
@@ -107,7 +107,6 @@ public class ItemDetailsController : MonoBehaviour
 
     public void Hide()
     {
-        currentItem = null;
         if (root != null)
         {
             root.SetActive(false);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [Header("Inventory Settings")]
-    [SerializeField] private int capacity = 12;
+    [SerializeField] private int capacity = 15;
 
     [Tooltip("Slots will be auto-sized to Capacity in Awake.")]
     private ItemData[] slots;
@@ -28,7 +28,7 @@ public class InventoryController : MonoBehaviour
     {
         if (item == null)
         {
-            Debug.LogWarning("[Inventory] Tried to add null ItemData.");
+            Debug.LogError("[Inventory] Tried to add null ItemData.");
             return false;
         }
 
@@ -42,7 +42,7 @@ public class InventoryController : MonoBehaviour
             }
         }
 
-        Debug.Log("[Inventory] Inventory full, cannot add item.");
+        Debug.LogWarning("[Inventory] Inventory full, cannot add item.");
         return false;
     }
 
@@ -50,7 +50,7 @@ public class InventoryController : MonoBehaviour
     {
         if (!IsValidIndex(index))
         {
-            Debug.LogWarning($"[Inventory] RemoveItem: invalid index {index}.");
+            Debug.LogError($"[Inventory] RemoveItem: invalid index {index}.");
             return;
         }
 
@@ -74,8 +74,6 @@ public class InventoryController : MonoBehaviour
         {
             slots[i] = null;
         }
-
-        Debug.Log("[Inventory] Cleared all slots.");
     }
 
     public bool HasFreeSlot()

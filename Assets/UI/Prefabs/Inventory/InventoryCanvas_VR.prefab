@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 130}
+  m_AnchoredPosition: {x: 0, y: 135}
   m_SizeDelta: {x: 180, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2193927924070669882
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1041612063989026934, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2940469149486268320, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_Pivot.x
@@ -587,11 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3892463759559114682, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 3892463759559114682, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 3892463759559114682, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -603,11 +603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596457180617656352, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 70
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 6596457180617656352, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 70
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7414378935351115696, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_Spacing.x
@@ -635,7 +635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7414378935351115696, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_ConstraintCount
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7790310308535514594, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_LocalPosition.z

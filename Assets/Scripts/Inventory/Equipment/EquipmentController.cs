@@ -6,7 +6,7 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] private Transform cameraAnchor;      // CenterEyeAnchor
 
     [Header("Where equipped items are attached")]
-    [SerializeField] private Transform rightHandAnchor;   // e.g. ControllerGrabInteractor transform or a child of it
+    [SerializeField] private Transform handAnchor;   // e.g. ControllerGrabInteractor transform or a child of it
 
     [Header("Controllers")]
     [SerializeField] private InventoryController inventoryController;

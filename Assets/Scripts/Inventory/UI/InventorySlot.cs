@@ -18,6 +18,14 @@ public class InventorySlot : MonoBehaviour
         Clear();
     }
 
+    public void Initialize(int index, InventoryScreenController screenController, ItemData item)
+    {
+        slotIndex = index;
+        screen = screenController;
+
+        SetItem(item);
+    }
+
     public void SetItem(ItemData item)
     {
         currentItem = item;

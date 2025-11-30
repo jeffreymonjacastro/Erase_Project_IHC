@@ -5,15 +5,17 @@ using UnityEngine.EventSystems;
 public class InventoryScreenController : MonoBehaviour
 {
     [Header("Panels")]
-    [SerializeField] private InventoryUIController inventory;
+    [SerializeField] private InventoryUIBase inventory;
     [SerializeField] private ItemDetailsController details;
 
     [Header("VR")]
     [Tooltip("Optional: assign to enable a laser pointer when UI is open.")]
     [SerializeField] private SimpleLaserPointer laserPointer;
 
-    private bool isOpen;
     private bool showInventory;
+    private bool isOpen;
+    public bool IsOpen => isOpen;
+
 
     private void Awake()
     {
@@ -32,36 +34,26 @@ public class InventoryScreenController : MonoBehaviour
         HideAll();
     }
 
-    private void Update()
+    public void SetIsOpen(bool value) { isOpen = value; }
+
+    public void Show()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.B))
+        if (showInventory || !ShowDetails())
         {
-            if (isOpen)
-            {
-                HideAll();
-                SetLaserActive(false);
-            }
-            else
-            {
-                if (showInventory || !ShowDetails())
-                {
-                    showInventory = true;
-                    ShowInventory();
-                }
-                else
-                {
-                    ShowDetails();
-                }
-                SetLaserActive(true);
-            }
-            isOpen = !isOpen;
+            ShowInventory();
         }
+        else
+        {
+            ShowDetails();
+        }
+        SetLaserActive(true);
     }
 
     public void HideAll()
     {
         inventory.Hide();
         details.Hide();
+        SetLaserActive(false);
     }
 
     private void SetLaserActive(bool active)
@@ -74,6 +66,7 @@ public class InventoryScreenController : MonoBehaviour
 
     public void ShowInventory()
     {
+        showInventory = true;
         details.Hide();
         inventory.Show();
     }
@@ -85,6 +78,7 @@ public class InventoryScreenController : MonoBehaviour
 
     public void ShowDetails(ItemData item, int index)
     {
+        showInventory = false;
         inventory.Hide();
         details.ShowItem(item, index);
     }
