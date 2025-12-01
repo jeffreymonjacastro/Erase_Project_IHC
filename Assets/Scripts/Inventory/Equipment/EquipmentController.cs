@@ -36,10 +36,8 @@ public class EquipmentController : MonoBehaviour
         }
 
         inventory.RemoveItem(index);
-        //Debug.LogError("[EquipmentController] Inventory item removed");
 
         screen.HideAll();
-        //Debug.LogError("[EquipmentController] Screen hidden");
 
         Vector3 spawnPos = cameraAnchor.position + cameraAnchor.forward * 1.0f;
         Quaternion spawnRot = Quaternion.LookRotation(cameraAnchor.forward, Vector3.up);

@@ -16,4 +16,11 @@ public class ItemData : ScriptableObject
     public string titleText;   // optional text description
     [TextArea]
     public string descriptionText;   // optional text description
+
+    [Header("Usage")]
+    [SerializeField] private bool isConsumable;
+    [SerializeField] private bool removeFromInventoryOnUse = true;
+    [SerializeField] private ItemUseHandlerBase useHandler;
+    public bool IsConsumable => isConsumable;
+    public bool RemoveFromInventoryOnUse => removeFromInventoryOnUse;
 }
