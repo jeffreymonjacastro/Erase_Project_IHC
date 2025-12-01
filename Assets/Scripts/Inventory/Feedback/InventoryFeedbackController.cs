@@ -9,6 +9,7 @@ public class InventoryFeedbackController : MonoBehaviour
     [SerializeField] private AudioClip itemStoredClip;
     [SerializeField] private AudioClip itemEquippedClip;
     [SerializeField] private AudioClip inventoryToggleClip;
+    [SerializeField] private AudioClip invalidActionClip;
 
     [Header("Haptics")]
     [SerializeField] private float storedHapticDuration = 0.15f;
@@ -40,34 +41,34 @@ public class InventoryFeedbackController : MonoBehaviour
         {
             Debug.LogError("[InventoryFeedbackController] Missing reference: inventory toggle clip");
         }
+
+        if (inventoryToggleClip == null)
+        {
+            Debug.LogError("[InventoryFeedbackController] Missing reference: invalid action clip");
+        }
     }
 
     public void PlayItemStoredFeedback()
     {
-        if (itemStoredClip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(itemStoredClip);
-        }
+        audioSource.PlayOneShot(itemStoredClip);
 
         StartCoroutine(HapticPulse(storedHapticDuration, storedHapticAmplitude, storedHapticFrequency));
     }
 
     public void PlayItemEquippedFeedback()
     {
-        if (itemEquippedClip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(itemEquippedClip);
-        }
+        audioSource.PlayOneShot(itemEquippedClip);
 
         StartCoroutine(HapticPulse(equipHapticDuration, equipHapticAmplitude, equipHapticFrequency));
     }
 
     public void PlayInventoryToggleFeedback()
     {
-        if (itemEquippedClip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(inventoryToggleClip);
-        }
+        audioSource.PlayOneShot(inventoryToggleClip);
+    }
+    public void PlayInvalidActionFeedback()
+    {
+        audioSource.PlayOneShot(invalidActionClip);
     }
 
     private IEnumerator HapticPulse(float duration, float amplitude, float frequency)

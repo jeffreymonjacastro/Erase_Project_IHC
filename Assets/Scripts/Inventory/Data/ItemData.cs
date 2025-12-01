@@ -23,4 +23,5 @@ public class ItemData : ScriptableObject
     [SerializeField] private ItemUseHandlerBase useHandler;
     public bool IsConsumable => isConsumable;
     public bool RemoveFromInventoryOnUse => removeFromInventoryOnUse;
+    public ItemUseHandlerBase UseHandler => useHandler;
 }

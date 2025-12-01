@@ -48,10 +48,7 @@ public class InventoryController : MonoBehaviour
                 slots[i] = item;
                 Debug.Log($"[Inventory] Added '{item.id}' at slot {i}.");
 
-                if (feedback != null)
-                {
-                    feedback.PlayItemStoredFeedback();
-                }
+                feedback?.PlayItemStoredFeedback();
 
                 return true;
             }
@@ -72,11 +69,6 @@ public class InventoryController : MonoBehaviour
         if (slots[index] != null)
         {
             Debug.Log($"[Inventory] Removed '{slots[index].id}' from slot {index}.");
-
-            if (feedback != null)
-            {
-                feedback.PlayItemEquippedFeedback();
-            }
         }
 
         slots[index] = null;

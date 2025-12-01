@@ -78,10 +78,7 @@ public class UIScreenController : MonoBehaviour
         }
         inventoryScreen.SetIsOpen(!inventoryScreen.IsOpen);
 
-        if (feedback != null)
-        {
-            feedback.PlayInventoryToggleFeedback();
-        }
+        feedback?.PlayInventoryToggleFeedback();
     }
 
     private void SetLaserActive(bool active)
