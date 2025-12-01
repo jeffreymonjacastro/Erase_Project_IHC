@@ -12,8 +12,6 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] private InventoryController inventoryController;
     [SerializeField] private InventoryScreenController screenController;    
 
-    private GameObject currentEquipped;
-
     private void Awake()
     {
         if (cameraAnchor == null)
@@ -34,8 +32,6 @@ public class EquipmentController : MonoBehaviour
 
     public void Equip(ItemData item, int index)
     {
-        Unequip();
-
         if (item == null || item.prefab == null)
         {
             Debug.LogError("Equip called with null item or prefab");
@@ -51,15 +47,6 @@ public class EquipmentController : MonoBehaviour
         Vector3 spawnPos = cameraAnchor.position + cameraAnchor.forward * 1.0f;
         Quaternion spawnRot = Quaternion.LookRotation(cameraAnchor.forward, Vector3.up);
 
-        currentEquipped = Instantiate(item.prefab, spawnPos, spawnRot);
-    }
-
-    public void Unequip()
-    {
-        if (currentEquipped != null)
-        {
-            Destroy(currentEquipped);
-            currentEquipped = null;
-        }
+        Instantiate(item.prefab, spawnPos, spawnRot);
     }
 }
