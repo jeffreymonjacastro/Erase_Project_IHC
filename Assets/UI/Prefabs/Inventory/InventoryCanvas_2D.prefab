@@ -1853,10 +1853,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 6887846433995836546}
-  inventory: {fileID: 0}
   slotContainer: {fileID: 274973243673221762}
   slotPrefab: {fileID: 12166019588597448, guid: ebe4b1e4d00e8334ebd975fd22427d4f, type: 3}
   screenController: {fileID: 3292982418196542383}
+  inventory: {fileID: 0}
 --- !u!1 &7335977476154773653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1882,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7335977476154773653}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2608,6 +2608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 8961899117231202764}
   details: {fileID: 2305933813437830158}
+  laserPointer: {fileID: 0}
 --- !u!1 &8076238489729753020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2705,8 @@ MonoBehaviour:
   titleText: {fileID: 721503835922292317}
   descriptionImage: {fileID: 8372266774662400323}
   descriptionText: {fileID: 2545558166282563463}
+  equipable: 1
+  equipmentController: {fileID: 0}
 --- !u!1 &8510050443839089820
 GameObject:
   m_ObjectHideFlags: 0

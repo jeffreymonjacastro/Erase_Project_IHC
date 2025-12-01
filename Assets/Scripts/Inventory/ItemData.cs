@@ -13,5 +13,7 @@ public class ItemData : ScriptableObject
     public Sprite inventoryIcon;     // small icon for grid
     public Sprite descriptionImage;  // optional larger image
     [TextArea]
+    public string titleText;   // optional text description
+    [TextArea]
     public string descriptionText;   // optional text description
 }
