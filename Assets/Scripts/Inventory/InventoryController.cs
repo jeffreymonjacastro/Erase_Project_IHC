@@ -7,6 +7,9 @@ public class InventoryController : MonoBehaviour
     [Header("Inventory Settings")]
     [SerializeField] private int capacity = 15;
 
+    [Header("Feedback")]
+    [SerializeField] private InventoryFeedbackController feedback;
+
     [Tooltip("Slots will be auto-sized to Capacity in Awake.")]
     private ItemData[] slots;
 
@@ -18,6 +21,12 @@ public class InventoryController : MonoBehaviour
         if (slots == null || slots.Length != capacity)
         {
             slots = new ItemData[capacity];
+        }
+
+
+        if (feedback == null)
+        {
+            Debug.LogWarning("[EquipmentController] Missing reference: feedback controller");
         }
     }
 
@@ -38,6 +47,12 @@ public class InventoryController : MonoBehaviour
             {
                 slots[i] = item;
                 Debug.Log($"[Inventory] Added '{item.id}' at slot {i}.");
+
+                if (feedback != null)
+                {
+                    feedback.PlayItemStoredFeedback();
+                }
+
                 return true;
             }
         }
@@ -57,6 +72,11 @@ public class InventoryController : MonoBehaviour
         if (slots[index] != null)
         {
             Debug.Log($"[Inventory] Removed '{slots[index].id}' from slot {index}.");
+
+            if (feedback != null)
+            {
+                feedback.PlayItemEquippedFeedback();
+            }
         }
 
         slots[index] = null;

@@ -965,6 +965,10 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8961899117231202764, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
+      propertyPath: screen
+      value: 
+      objectReference: {fileID: 5530999103395190430}
     m_RemovedComponents:
     - {fileID: 3297014119278359549, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
     m_RemovedGameObjects:
@@ -1241,6 +1245,17 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5530999103395190430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3292982418196542383, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
+  m_PrefabInstance: {fileID: 7021402565588411697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035379127397734791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ed982c766f55d4abd5fdd452da8cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7425421942721199439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 467650353804892286, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}

@@ -5,12 +5,9 @@ public class EquipmentController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private Transform cameraAnchor;      // CenterEyeAnchor
 
-    [Header("Where equipped items are attached")]
-    [SerializeField] private Transform handAnchor;   // e.g. ControllerGrabInteractor transform or a child of it
-
     [Header("Controllers")]
-    [SerializeField] private InventoryController inventoryController;
-    [SerializeField] private InventoryScreenController screenController;    
+    [SerializeField] private InventoryController inventory;
+    [SerializeField] private InventoryScreenController screen;
 
     private void Awake()
     {
@@ -19,12 +16,12 @@ public class EquipmentController : MonoBehaviour
             Debug.LogError("[EquipmentController] Missing reference: camera anchor");
         }
 
-        if (inventoryController == null)
+        if (inventory == null)
         {
             Debug.LogError("[EquipmentController] Missing reference: inventory controller");
         }
 
-        if (screenController == null)
+        if (screen == null)
         {
             Debug.LogError("[EquipmentController] Missing reference: screen controller");
         }
@@ -38,10 +35,10 @@ public class EquipmentController : MonoBehaviour
             return;
         }
 
-        inventoryController.RemoveItem(index);
+        inventory.RemoveItem(index);
         //Debug.LogError("[EquipmentController] Inventory item removed");
 
-        screenController.HideAll();
+        screen.HideAll();
         //Debug.LogError("[EquipmentController] Screen hidden");
 
         Vector3 spawnPos = cameraAnchor.position + cameraAnchor.forward * 1.0f;

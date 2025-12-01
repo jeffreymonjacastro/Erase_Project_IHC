@@ -13,7 +13,7 @@ public abstract class InventoryUIBase : MonoBehaviour
     [SerializeField] protected GameObject slotPrefab;       // the Slot prefab
 
     [Header("Screen")]
-    [SerializeField] protected InventoryScreenController screenController;
+    [SerializeField] protected InventoryScreenController screen;
 
     protected virtual void Awake()
     {
@@ -33,7 +33,7 @@ public abstract class InventoryUIBase : MonoBehaviour
             Debug.LogError("[InventoryUIBase] Missing reference: slot prefab");
         }
 
-        if (screenController == null)
+        if (screen == null)
         {
             Debug.LogError("[InventoryUIBase] Missing reference: screen controller");
         }

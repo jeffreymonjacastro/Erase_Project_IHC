@@ -37,7 +37,7 @@ public class InventoryUIController : InventoryUIBase
         {
             GameObject slotObj = Instantiate(slotPrefab, slotContainer);
             InventorySlot slot = slotObj.GetComponent<InventorySlot>();
-            slot.Initialize(i, screenController);
+            slot.Initialize(i, screen);
 
             slots[i] = slot;
         }

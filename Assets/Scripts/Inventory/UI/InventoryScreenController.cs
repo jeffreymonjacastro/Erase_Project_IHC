@@ -8,10 +8,6 @@ public class InventoryScreenController : MonoBehaviour
     [SerializeField] private InventoryUIBase inventory;
     [SerializeField] private ItemDetailsController details;
 
-    [Header("VR")]
-    [Tooltip("Optional: assign to enable a laser pointer when UI is open.")]
-    [SerializeField] private SimpleLaserPointer laserPointer;
-
     private bool showInventory;
     private bool isOpen;
     public bool IsOpen => isOpen;
@@ -46,22 +42,12 @@ public class InventoryScreenController : MonoBehaviour
         {
             ShowDetails();
         }
-        SetLaserActive(true);
     }
 
     public void HideAll()
     {
         inventory.Hide();
         details.Hide();
-        SetLaserActive(false);
-    }
-
-    private void SetLaserActive(bool active)
-    {
-        if (laserPointer != null)
-        {
-            laserPointer.SetActive(active);
-        }
     }
 
     public void ShowInventory()

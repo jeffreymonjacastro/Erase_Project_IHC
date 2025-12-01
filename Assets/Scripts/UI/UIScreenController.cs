@@ -9,8 +9,14 @@ public class UIScreenController : MonoBehaviour
     [SerializeField] private InventoryScreenController objectInventoryScreen;
     [SerializeField] private InventoryScreenController clueInventoryScreen;
 
+    [Header("VR")]
+    [Tooltip("Optional: assign to enable a laser pointer when UI is open.")]
+    [SerializeField] private SimpleLaserPointer laserPointer;
 
-    // Start is called before the first frame update
+    [Header("Feedback")]
+    [SerializeField] private InventoryFeedbackController feedback;
+
+
     void Start()
     {
         if (objectInventoryScreen == null)
@@ -22,9 +28,18 @@ public class UIScreenController : MonoBehaviour
         {
             Debug.LogError("[UIScreenController] Missing reference: clue inventory screen");
         }
+
+        if (laserPointer == null)
+        {
+            Debug.LogWarning("[UIScreenController] Missing reference: laser pointer");
+        }
+
+        if (feedback == null)
+        {
+            Debug.LogWarning("[UIScreenController] Missing reference: feedback controller");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (OVRInput.GetDown(OVRInput.RawButton.B))
@@ -50,14 +65,30 @@ public class UIScreenController : MonoBehaviour
 
     private void UpdateInventoryScreen(InventoryScreenController inventoryScreen)
     {
+
         if (inventoryScreen.IsOpen)
         {
             inventoryScreen.HideAll();
+            SetLaserActive(false);
         }
         else
         {
             inventoryScreen.Show();
+            SetLaserActive(true);
         }
         inventoryScreen.SetIsOpen(!inventoryScreen.IsOpen);
+
+        if (feedback != null)
+        {
+            feedback.PlayInventoryToggleFeedback();
+        }
+    }
+
+    private void SetLaserActive(bool active)
+    {
+        if (laserPointer != null)
+        {
+            laserPointer.SetActive(active);
+        }
     }
 }

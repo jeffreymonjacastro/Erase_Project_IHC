@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class HandPickupController : MonoBehaviour
 {
-    [SerializeField] private InventoryController inventory;
+    [Header("World")]
     [SerializeField] private HandGrabInteractor grabInteractor;
+    
+    [Header("Controllers")]
+    [SerializeField] private InventoryController inventory;
 
     private void Awake()
     {
