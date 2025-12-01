@@ -18,10 +18,23 @@ public class ItemData : ScriptableObject
     public string descriptionText;   // optional text description
 
     [Header("Usage")]
-    [SerializeField] private bool isConsumable;
+    [SerializeField] private bool isConsumable = false;
     [SerializeField] private bool removeFromInventoryOnUse = true;
     [SerializeField] private ItemUseHandlerBase useHandler;
     public bool IsConsumable => isConsumable;
     public bool RemoveFromInventoryOnUse => removeFromInventoryOnUse;
     public ItemUseHandlerBase UseHandler => useHandler;
+
+    private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(id))
+            Debug.LogError($"[ItemData '{name}']: Missing id!");
+
+        if (prefab == null)
+            Debug.LogError($"[ItemData '{name}']: Missing prefab!");
+
+        if (isConsumable == true && useHandler == null)
+            Debug.LogError($"[ItemData '{name}']: Missing use handler!");
+    }
+
 }

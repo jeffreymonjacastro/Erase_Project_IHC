@@ -14,9 +14,8 @@ public class ItemDetailsController : MonoBehaviour
     public Image descriptionImage;
     public TMP_Text descriptionText;
 
-    [Header("Equipable")]
-    [SerializeField] private bool equipable = true;
-    [SerializeField] private EquipmentController equipment;
+    [Header("Controllers")]
+    [SerializeField] private InventoryActionsController actions;
 
     private ItemData currentItem;
     private int currentItemIndex;
@@ -29,20 +28,19 @@ public class ItemDetailsController : MonoBehaviour
             root = gameObject;
         }
 
-        if (equipable && equipment == null)
+        if (actions == null)
         {
-            Debug.LogError("[ItemDetailsController] Missing reference: equipment controller");
+            Debug.LogError("[ItemDetailsController] Missing reference: inventory actions controller");
         }
 
         Hide();
     }
 
-    public void OnEquipPressed()
+    public void OnActionButtonPressed()
     {
-        if (currentItem == null || !equipable) return;
+        if (currentItem == null || currentItemIndex < 0) return;
 
-        Debug.LogWarning($"The index of the selected item is {currentItemIndex}");
-        equipment.Equip(currentItem, currentItemIndex);
+        actions.HandleItemAction(currentItem, currentItemIndex);
 
         currentItem = null;
         Hide();
