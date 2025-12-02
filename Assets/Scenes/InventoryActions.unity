@@ -16289,7 +16289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRoot: {fileID: 653192287}
-  rightHand: {fileID: 989334441}
+  playerCamera: {fileID: 0}
   inventory: {fileID: 75675599}
   equipment: {fileID: 717196950}
   screen: {fileID: 1589865492}
@@ -26802,7 +26802,7 @@ GameObject:
   - component: {fileID: 553760212}
   - component: {fileID: 553760211}
   m_Layer: 0
-  m_Name: FeedbackSystem
+  m_Name: InventoryFeedbackSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35847,7 +35847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a71c3d7f301c4e469fbc13631d5f958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraAnchor: {fileID: 653192286}
+  headAnchor: {fileID: 0}
+  gasFeedback: {fileID: 0}
 --- !u!4 &717196951
 Transform:
   m_ObjectHideFlags: 0

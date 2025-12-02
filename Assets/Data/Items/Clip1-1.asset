@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Clip1-1
   m_EditorClassIdentifier: 
   id: clip1-1
-  prefab: {fileID: 0}
   inventoryIcon: {fileID: 21300000, guid: 9890924a4221b6b429c8a7418f2595b5, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Interview with the janitor - Part 1
@@ -22,3 +21,11 @@ MonoBehaviour:
     the keys in my locker, which has a combination lock as security. I don''t think
     somebody could''ve gained access to the laboratories and do something so cruel.
     I believe it must have been an accident. '
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}

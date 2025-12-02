@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Clip2
   m_EditorClassIdentifier: 
   id: clip2
-  prefab: {fileID: 0}
   inventoryIcon: {fileID: 21300000, guid: 152e96fbea6f053448a0129ecb4d27a7, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Students' testimonies
   descriptionText: Some students tried to open the janitor's locker to get the keys
     to the laboratories, but they eventually gave up after trying multiple combinations.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}

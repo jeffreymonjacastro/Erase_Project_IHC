@@ -10,15 +10,20 @@ public class ItemDetailsController : MonoBehaviour
     [SerializeField] private GameObject root;
 
     [Header("UI References")]
-    public TMP_Text titleText;
-    public Image descriptionImage;
-    public TMP_Text descriptionText;
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private Image descriptionImage;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Button actionButton;
+    [SerializeField] private TMP_Text actionButtonText;
 
     [Header("Controllers")]
     [SerializeField] private InventoryActionsController actions;
 
     private ItemData currentItem;
     private int currentItemIndex;
+
+    public ItemData CurrentItem => currentItem;
+    public ItemUseHandlerBase CurrentItemUseHandler => currentItem != null ? currentItem.UseHandler : null;
 
     private void Awake()
     {
@@ -36,14 +41,28 @@ public class ItemDetailsController : MonoBehaviour
         Hide();
     }
 
+    public void SetActionButtonLabel(string label)
+    {
+        if (actionButton == null || actionButtonText == null) return;
+        
+        bool active = !string.IsNullOrEmpty(label);
+
+        actionButtonText.text = label ?? string.Empty;
+
+        actionButton.interactable = active;
+    }
+
     public void OnActionButtonPressed()
     {
         if (currentItem == null || currentItemIndex < 0) return;
 
         actions.HandleItemAction(currentItem, currentItemIndex);
 
-        currentItem = null;
-        Hide();
+        if (currentItem.RemoveFromInventoryOnUse)
+        {
+            currentItem = null;
+            Hide();
+        }
     }
     
     public bool ShowItem() 

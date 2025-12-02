@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Clip4-1
   m_EditorClassIdentifier: 
   id: clip4-1
-  prefab: {fileID: 0}
   inventoryIcon: {fileID: 21300000, guid: 8909e4a3a3aa93349b1aebb3bb76bb62, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Interview with Chief Police Officer - Part 1
   descriptionText: Through our investigation, we've determined that the leak came
     from inside the building. This points towards a potentially accidental leakage
     that must have started at around 6 am.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}

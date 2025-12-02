@@ -6,35 +6,49 @@ public class ItemData : ScriptableObject
     [Header("Identity")]
     public string id; // e.g. "mask", "newspaper_clip_1"
 
-    [Header("World Representation")]
-    public GameObject prefab; // 3D object to equip
-
     [Header("Inventory UI")]
-    public Sprite inventoryIcon;     // small icon for grid
-    public Sprite descriptionImage;  // optional larger image
+    public Sprite inventoryIcon;
+    public Sprite descriptionImage;
     [TextArea]
-    public string titleText;   // optional text description
+    public string titleText;
     [TextArea]
-    public string descriptionText;   // optional text description
+    public string descriptionText;
+
+    [Header("World Representation")]
+    public GameObject prefab;
+
+    [Header("Type & Behavior")]
+    public ItemType type = ItemType.Generic;
+
+    [Tooltip("Only used when ItemType == Key")]
+    public string keyId;
+
+    [Tooltip("If true, equiping item grants protection from gas")]
+    public bool grantsGasProtection = false;
 
     [Header("Usage")]
-    [SerializeField] private bool isConsumable = false;
+    [SerializeField] private bool inWorld = true;
+    [SerializeField] private bool isUsable = false;
     [SerializeField] private bool removeFromInventoryOnUse = true;
     [SerializeField] private ItemUseHandlerBase useHandler;
-    public bool IsConsumable => isConsumable;
+    public bool IsUsable => isUsable;
     public bool RemoveFromInventoryOnUse => removeFromInventoryOnUse;
     public ItemUseHandlerBase UseHandler => useHandler;
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (string.IsNullOrEmpty(id))
             Debug.LogError($"[ItemData '{name}']: Missing id!");
 
-        if (prefab == null)
+        if (type == ItemType.Key && string.IsNullOrEmpty(keyId))
+            Debug.LogError($"[ItemData '{name}']: Missing key id!");
+
+        if (inWorld && prefab == null)
             Debug.LogError($"[ItemData '{name}']: Missing prefab!");
 
-        if (isConsumable == true && useHandler == null)
+        if (isUsable == true && useHandler == null)
             Debug.LogError($"[ItemData '{name}']: Missing use handler!");
     }
-
+#endif 
 }

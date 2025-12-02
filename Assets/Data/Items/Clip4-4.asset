@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Clip4-4
   m_EditorClassIdentifier: 
   id: clip4-4
-  prefab: {fileID: 0}
   inventoryIcon: {fileID: 21300000, guid: 8909e4a3a3aa93349b1aebb3bb76bb62, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Interview with Chief Police Officer - Part 4
   descriptionText: We are still researching the origin of the leak, with the information
     available, we can confidently say that it originated from one of the two laboratories,
     but the exact cause of the leak is still unknown.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}

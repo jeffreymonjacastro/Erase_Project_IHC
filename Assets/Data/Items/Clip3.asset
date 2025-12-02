@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Clip3
   m_EditorClassIdentifier: 
   id: clip3
-  prefab: {fileID: 0}
   inventoryIcon: {fileID: 21300000, guid: cc984a87977b37547a81a36d1cb3ad3f, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Security guard's testimony
@@ -21,3 +20,11 @@ MonoBehaviour:
     attempted to reach the source, but sadly the contamination measurement device
     was inside a locked box inside the storehouse and he couldn't find the code in
     time. Tragically, he died.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}
