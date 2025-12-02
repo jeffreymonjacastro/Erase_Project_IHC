@@ -6,7 +6,7 @@ public class KeyUseHandler : ItemUseHandlerBase
     public override string GetLabel(ItemUseContext ctx)
     {
         DoorLock door = ctx.targetedDoorLock;
-        if (door == null || !door.IsInRange(ctx.playerRoot))
+        if (door == null)
             return string.Empty;
 
         if (door.RequiredKeyId == item.keyId)
@@ -20,7 +20,7 @@ public class KeyUseHandler : ItemUseHandlerBase
     public override bool CanUse(ItemUseContext ctx)
     {
         DoorLock door = ctx.targetedDoorLock;
-        if (door == null || !door.IsInRange(ctx.playerRoot))
+        if (door == null)
             return false;
 
         return door.RequiredKeyId == item.keyId;

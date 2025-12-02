@@ -12,7 +12,6 @@ public class EquipmentController : MonoBehaviour
     public bool HasGasProtection { get; private set; }
 
     private ItemData _currentHeadItem;
-    private GameObject _currentHeadItemInstance;
 
     private void Awake()
     {
@@ -56,8 +55,10 @@ public class EquipmentController : MonoBehaviour
 
         if (item.grantsGasProtection)
         {
-            HasGasProtection = true;
-            gasFeedback.SetMaskEquipped(true);
+            HasGasProtection = true; 
+            
+            if (item.type == ItemType.Mask)
+                gasFeedback.SetMaskEquipped(true);
         }
     }
 
@@ -74,7 +75,9 @@ public class EquipmentController : MonoBehaviour
         if (item.grantsGasProtection)
         {
             HasGasProtection = false;
-            gasFeedback.SetMaskEquipped(false);
+
+            if (item.type == ItemType.Mask)
+                gasFeedback.SetMaskEquipped(false);
         }
     }
 
@@ -82,27 +85,11 @@ public class EquipmentController : MonoBehaviour
     {
         UnequipHeadItem();
 
-        if (item.prefab == null)
-        {
-            Debug.LogWarning($"[EquipmentController] EquipHeadItem: Item '{item.name}' has no prefab to equip.");
-            return;
-        }
-
         _currentHeadItem = item;
-        _currentHeadItemInstance = Instantiate(item.prefab, headAnchor);
-        _currentHeadItemInstance.transform.localPosition = Vector3.zero;
-        _currentHeadItemInstance.transform.localRotation = Quaternion.identity;
-        _currentHeadItemInstance.transform.localScale = Vector3.one;
     }
 
     private void UnequipHeadItem()
     {
-        if (_currentHeadItemInstance != null)
-        {
-            Destroy(_currentHeadItemInstance);
-            _currentHeadItemInstance = null;
-        }
-
         _currentHeadItem = null;
     }
 }

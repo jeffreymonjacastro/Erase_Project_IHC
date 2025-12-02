@@ -30,10 +30,8 @@ public class ItemData : ScriptableObject
     [SerializeField] private bool inWorld = true;
     [SerializeField] private bool isUsable = false;
     [SerializeField] private bool removeFromInventoryOnUse = true;
-    [SerializeField] private ItemUseHandlerBase useHandler;
     public bool IsUsable => isUsable;
     public bool RemoveFromInventoryOnUse => removeFromInventoryOnUse;
-    public ItemUseHandlerBase UseHandler => useHandler;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -46,9 +44,6 @@ public class ItemData : ScriptableObject
 
         if (inWorld && prefab == null)
             Debug.LogError($"[ItemData '{name}']: Missing prefab!");
-
-        if (isUsable == true && useHandler == null)
-            Debug.LogError($"[ItemData '{name}']: Missing use handler!");
     }
 #endif 
 }

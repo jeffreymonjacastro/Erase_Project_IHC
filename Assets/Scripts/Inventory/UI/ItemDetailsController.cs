@@ -22,8 +22,7 @@ public class ItemDetailsController : MonoBehaviour
     private ItemData currentItem;
     private int currentItemIndex;
 
-    public ItemData CurrentItem => currentItem;
-    public ItemUseHandlerBase CurrentItemUseHandler => currentItem != null ? currentItem.UseHandler : null;
+    private bool active = false;
 
     private void Awake()
     {
@@ -39,6 +38,21 @@ public class ItemDetailsController : MonoBehaviour
         }
 
         Hide();
+    }
+
+    private void Update()
+    {
+        if (!active) 
+            return;
+
+        if (currentItem == null)
+        {
+            SetActionButtonLabel(string.Empty);
+            return;
+        }
+
+        string label = actions.GetActionLabelFor(currentItem);
+        SetActionButtonLabel(label);
     }
 
     public void SetActionButtonLabel(string label)
@@ -60,7 +74,7 @@ public class ItemDetailsController : MonoBehaviour
 
         if (currentItem.RemoveFromInventoryOnUse)
         {
-            currentItem = null;
+            UpdateCurrentItem(null);
             Hide();
         }
     }
@@ -79,7 +93,7 @@ public class ItemDetailsController : MonoBehaviour
 
     public void ShowItem(ItemData item, int index)
     {
-        currentItem = item;
+        UpdateCurrentItem(item);
         currentItemIndex = index;
 
         if (item == null)
@@ -91,8 +105,16 @@ public class ItemDetailsController : MonoBehaviour
         ShowData();
     }
 
+    private void UpdateCurrentItem(ItemData item)
+    {
+        currentItem = item;
+
+    }
+
     public void ShowData()
     {
+        active = true;
+
         if (titleText != null)
         {
             titleText.text = string.IsNullOrEmpty(currentItem.id) ? "Item" : currentItem.id;
@@ -126,6 +148,7 @@ public class ItemDetailsController : MonoBehaviour
     {
         if (root != null)
         {
+            active = false;
             root.SetActive(false);
         }
     }

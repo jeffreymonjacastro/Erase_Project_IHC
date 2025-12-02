@@ -1,3 +1,4 @@
+using Meta.WitAi.Composer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +16,11 @@ public class InventoryActionsController : MonoBehaviour
     [Header("Controllers")]
     [SerializeField] private InventoryController inventory;
     [SerializeField] private EquipmentController equipment;
-    [SerializeField] private ItemDetailsController details;
     [SerializeField] private InventoryScreenController screen;
     [SerializeField] private InventoryFeedbackController feedback;
 
-    private ItemUseHandlerBase currentItemUseHandler => details.CurrentItemUseHandler;
+    [Header("Usage")]
+    [SerializeField] private ItemUseHandlerRegistry handlerRegistry;
 
     private DoorLock _currentTargetDoor;
 
@@ -45,11 +46,6 @@ public class InventoryActionsController : MonoBehaviour
             Debug.LogError("[InventoryActionsController] Missing reference: equipment controller");
         }
 
-        if (details == null)
-        {
-            Debug.LogError("[InventoryActionsController] Missing reference: item details controller");
-        }
-
         if (screen == null)
         {
             Debug.LogError("[InventoryActionsController] Missing reference: screen controller");
@@ -59,16 +55,31 @@ public class InventoryActionsController : MonoBehaviour
         {
             Debug.LogWarning("[InventoryActionsController] Missing reference: feedback controller");
         }
-    }
-    private void Update()
-    {
-        UpdateTarget();
-        if (currentItemUseHandler != null)
+
+        if (handlerRegistry == null)
         {
-            var label = currentItemUseHandler.GetLabel(BuildUseContext());
-            details.SetActionButtonLabel(label);
+            Debug.LogError("[InventoryActionsController] Missing reference: use handler registry");
         }
     }
+
+    public string GetActionLabelFor(ItemData item)
+    {
+        if (item == null) return string.Empty;
+
+        if (item.type == ItemType.Generic)
+        {
+            return "Summon";
+        }
+
+        var handler = handlerRegistry.GetHandlerFor(item);
+        if (handler == null) return string.Empty;
+
+        if (item.type == ItemType.Key)
+            UpdateTarget();
+
+        return handler.GetLabel(BuildUseContext());
+    }
+
 
     private void UpdateTarget()
     {
@@ -105,13 +116,15 @@ public class InventoryActionsController : MonoBehaviour
     {
         var ctx = BuildUseContext();
 
-        if (!item.UseHandler.CanUse(ctx))
+        var handler = handlerRegistry.GetHandlerFor(item);
+
+        if (!handler.CanUse(ctx))
         {
             feedback?.PlayInvalidActionFeedback();
             return;
         }
 
-        item.UseHandler.Use(ctx);
+        handler.Use(ctx);
 
         if (item.RemoveFromInventoryOnUse)
         {

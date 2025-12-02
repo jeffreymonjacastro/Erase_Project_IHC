@@ -515,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1041612063989026934, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2033768206153986489, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_AnchorMax.x
@@ -549,6 +549,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2305933813437830158, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
+      propertyPath: actionButton
+      value: 
+      objectReference: {fileID: 2654535367705373812}
+    - target: {fileID: 2305933813437830158, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
+      propertyPath: actionButtonText
+      value: 
+      objectReference: {fileID: 5877614065142102301}
     - target: {fileID: 2545558166282563463, guid: 9c6b972854ae24548a55955e03fe7977, type: 3}
       propertyPath: m_text
       value: No description available.

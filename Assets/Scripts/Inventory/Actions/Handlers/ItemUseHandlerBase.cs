@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public abstract class ItemUseHandlerBase : ScriptableObject
+public abstract class ItemUseHandlerBase : MonoBehaviour
 {
     [Header("Item")]
     [SerializeField] protected ItemData item;

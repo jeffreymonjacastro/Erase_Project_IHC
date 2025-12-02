@@ -9,73 +9,55 @@ public class DoorLock : MonoBehaviour
 
     public string RequiredKeyId => requiredKeyId;
 
-    [Tooltip("Initial locked state of the door")]
-    [SerializeField] private bool isLocked = true;
-    public bool IsLocked => isLocked;
+    [Header("Initial State")]
+    [SerializeField] private bool startLocked = false;
+    [SerializeField] private bool startOpen = false;
 
-    [Tooltip("Maximum distance from player root to allow interaction")]
-    [SerializeField] private float interactionRadius = 1.5f;
-
-    [Header("Door References")]
-    [SerializeField] private Transform doorTransform;        // used for distance check
-    [SerializeField] private Animator doorAnimator;
-    [SerializeField] private string openTriggerName = "Open";
-    [SerializeField] private string closeTriggerName = "Close";
-
-    [Header("Events")]
-    public UnityEvent onUnlocked;
-    public UnityEvent onLocked;
+    public bool IsLocked { get; private set; }
+    public bool IsOpen { get; private set; }
 
     private void Awake()
     {
-        if (string.IsNullOrEmpty(requiredKeyId))
+        if (startLocked && string.IsNullOrEmpty(requiredKeyId))
         {
             Debug.LogError("[DoorLock] Empty or null: required key id");
         }
-
-        if (doorTransform == null)
-        {
-            doorTransform = transform;
-        }
-
-        if (doorAnimator == null)
-        {
-            Debug.LogWarning("[DoorLock] Missing reference: door animator");
-        }
-    }
-
-    public bool IsInRange(Transform playerRoot)
-    {
-        if (playerRoot == null)
-            return false;
-
-        float dist = Vector3.Distance(playerRoot.position, doorTransform.position);
-        return dist <= interactionRadius;
     }
 
     public void Unlock()
     {
-        if (!isLocked)
-            return;
+        if (!IsLocked) return;
 
-        isLocked = false;
-
-        if (doorAnimator != null && !string.IsNullOrEmpty(openTriggerName))
-            doorAnimator.SetTrigger(openTriggerName);
-
-        onUnlocked?.Invoke();
+        IsLocked = false;
     }
-
     public void Lock()
     {
-        if (isLocked)
-            return;
+        if (IsLocked) return;
 
-        isLocked = true;
+        IsLocked = true;
+    }
 
-        if (doorAnimator != null && !string.IsNullOrEmpty(closeTriggerName))
-            doorAnimator.SetTrigger(closeTriggerName);
+    public void Open()
+    {
+        if (IsLocked || IsOpen) return;
 
-        onLocked?.Invoke();
+        IsOpen = true;
+    }
+
+    public void Close()
+    {
+        if (!IsOpen) return;
+
+        IsOpen = false;
+    }
+
+    public void ToggleOpen()
+    {
+        if (IsLocked) return;
+
+        if (IsOpen)
+            Close();
+        else
+            Open();
     }
 }
