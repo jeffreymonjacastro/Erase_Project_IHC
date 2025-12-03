@@ -30,10 +30,6 @@ public class DoorRotator : MonoBehaviour
         // Precompute open rotations
         openRotationOutwards = closedRotation * Quaternion.Euler(0, openAngle, 0);
         openRotationInwards = closedRotation * Quaternion.Euler(0, -openAngle, 0);
-
-        Debug.Log($"[DoorRotator] closed={closedRotation.eulerAngles}, " +
-          $"out={openRotationOutwards.eulerAngles}, " +
-          $"in={openRotationInwards.eulerAngles}");
     }
 
     /// <summary>

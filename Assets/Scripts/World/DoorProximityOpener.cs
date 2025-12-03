@@ -10,7 +10,7 @@ public class DoorProximityOpener : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private string playerTag = "Player";
-    [SerializeField] private float autoCloseDelay = 1.5f;
+    [SerializeField] private float autoCloseDelay = 0.3f;
 
     private Transform player;
     private Coroutine closeRoutine;
@@ -30,9 +30,7 @@ public class DoorProximityOpener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("!! trigger active");
         if (!other.CompareTag(playerTag)) return;
-        //Debug.Log("!! player tag confirmed");
 
         player = other.transform;
 
@@ -45,7 +43,6 @@ public class DoorProximityOpener : MonoBehaviour
 
         if (!doorLock.IsLocked)
         {
-            //Debug.Log("!! opening door");
             doorLock.Open();
         }
 
