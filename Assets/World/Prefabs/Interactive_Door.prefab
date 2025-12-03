@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4556694855844174}
   - component: {fileID: 33652672654408418}
   - component: {fileID: 23151539147022078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 23072247148951056}
   - component: {fileID: 7219536460378865218}
   - component: {fileID: 2825865950733731235}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +205,7 @@ MonoBehaviour:
   openAngle: 90
   smoothSpeed: 2
   doorLock: {fileID: 2793872369440908102}
+  invertRotation: 0
 --- !u!1 &1965528337302418
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4173873760860446}
   - component: {fileID: 2793872369440908102}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Interactive_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +267,7 @@ GameObject:
   - component: {fileID: 1172812319820106267}
   - component: {fileID: 8007986854508782406}
   - component: {fileID: 8339772631850245846}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,8 +6,16 @@ public class KeyUseHandler : ItemUseHandlerBase
     public override string GetLabel(ItemUseContext ctx)
     {
         DoorLock door = ctx.targetedDoorLock;
+
+        Debug.Log($"[KeyUseHandler] item.keyId = {item.keyId}");
+
         if (door == null)
+        {
+            Debug.LogWarning($"[KeyUseHandler] Missing door");
             return string.Empty;
+        }
+
+        Debug.Log($"[KeyUseHandler] door.RequiredKeyId = {door.RequiredKeyId}");
 
         if (door.RequiredKeyId == item.keyId)
         {

@@ -72,7 +72,11 @@ public class InventoryActionsController : MonoBehaviour
         }
 
         var handler = handlerRegistry.GetHandlerFor(item);
-        if (handler == null) return string.Empty;
+        if (handler == null)
+        {
+            Debug.LogWarning($"[InventoryActionsController] Missing handler for {item.id}");
+            return string.Empty;
+        }
 
         if (item.type == ItemType.Key)
             UpdateTarget();
@@ -132,7 +136,6 @@ public class InventoryActionsController : MonoBehaviour
         }
 
         feedback?.PlayItemEquippedFeedback();
-        screen.HideAll();
     }
 
     private ItemUseContext BuildUseContext()

@@ -117,7 +117,7 @@ public class ItemDetailsController : MonoBehaviour
 
         if (titleText != null)
         {
-            titleText.text = string.IsNullOrEmpty(currentItem.id) ? "Item" : currentItem.id;
+            titleText.text = string.IsNullOrEmpty(currentItem.titleText) ? currentItem.id : currentItem.titleText;
         }
 
         if (descriptionImage != null)

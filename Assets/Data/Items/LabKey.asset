@@ -16,7 +16,7 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: f70a3aea7f4bccc42a41b11e0c7f2ecd, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Key
-  descriptionText: Something about this key seems special..
+  descriptionText: Something about this key seems special...
   prefab: {fileID: 8653273665983467299, guid: e39ebc9703fad4f41af1bccebef3e95f, type: 3}
   type: 1
   keyId: lab_key

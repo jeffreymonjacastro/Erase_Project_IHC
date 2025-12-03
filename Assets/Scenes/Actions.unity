@@ -16274,7 +16274,7 @@ MonoBehaviour:
   interactRayDistance: 3
   interactLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   inventory: {fileID: 75675599}
   equipment: {fileID: 717196950}
   screen: {fileID: 1589865492}
@@ -32272,7 +32272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037080, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 503
+      value: 1527
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: _trackingOriginType
@@ -107696,6 +107696,22 @@ PrefabInstance:
     - target: {fileID: 4895514858376750, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 348180564217486968, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
+      propertyPath: startLocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 348180564217486968, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
+      propertyPath: requiredKeyId
+      value: lab_key
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839294187965104655, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
+      propertyPath: startLocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839294187965104655, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
+      propertyPath: requiredKeyId
+      value: lab_key
       objectReference: {fileID: 0}
     - target: {fileID: 3575895962340015728, guid: 06d18037ef0ae8647a902dcbb2205bf7, type: 3}
       propertyPath: m_StaticEditorFlags

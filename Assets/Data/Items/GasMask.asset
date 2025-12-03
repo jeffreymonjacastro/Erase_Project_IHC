@@ -15,8 +15,8 @@ MonoBehaviour:
   id: gas-mask
   inventoryIcon: {fileID: 21300000, guid: e51311865c6cc0a48ad97ec9dbe5b372, type: 3}
   descriptionImage: {fileID: 0}
-  titleText: 
-  descriptionText: 
+  titleText: Gas Mask
+  descriptionText: It appears you'd need this.
   prefab: {fileID: 7374110965506114158, guid: 1ed728e034b0440408e811238c3f98b2, type: 3}
   type: 2
   keyId: 

@@ -22,6 +22,9 @@ public class DoorLock : MonoBehaviour
         {
             Debug.LogError("[DoorLock] Empty or null: required key id");
         }
+
+        IsLocked = startLocked;
+        IsOpen = startOpen;
     }
 
     public void Unlock()
