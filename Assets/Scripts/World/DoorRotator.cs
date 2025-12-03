@@ -5,7 +5,9 @@ public class DoorRotator : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] private float openAngle = 90.0f;
     [SerializeField] private float smoothSpeed = 2.0f;
-    [SerializeField] private DoorLock doorLock;
+    [SerializeField] private DoorLock doorLock; 
+    [SerializeField] private bool invertRotation = false;
+
 
     private Quaternion closedRotation;
     private Quaternion openRotationOutwards;
@@ -48,7 +50,7 @@ public class DoorRotator : MonoBehaviour
 
         if (doorLock.IsOpen)
         {
-            targetRotation = openOutwards ? openRotationOutwards : openRotationInwards;
+            targetRotation = (openOutwards ^ invertRotation) ? openRotationOutwards : openRotationInwards;
         }
 
         transform.localRotation = Quaternion.Slerp(
