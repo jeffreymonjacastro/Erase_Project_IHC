@@ -12,9 +12,9 @@ public class GasFeedbackController : MonoBehaviour
     [SerializeField] private float maskFadeSpeed = 6f;
 
     [Header("Danger Vignette Settings")]
-    [SerializeField] private float vignetteMaxAlpha = 0.3f;
+    [SerializeField] private float vignetteMaxAlpha = 0.15f;
     [SerializeField] private float vignetteFadeSpeed = 7f;
-    [SerializeField] private float vignettePulseSpeed = 1.1f;
+    [SerializeField] private float vignettePulseSpeed = 0.3f;
 
     private bool maskEquipped;
     private float gasIntensity; // 0..1, set by gas zones
@@ -73,7 +73,7 @@ public class GasFeedbackController : MonoBehaviour
         if (gasIntensity > 0f)
         {
             // Pulse between 0.6 and 1.0 based on time
-            float pulse = 0.6f + 0.4f * Mathf.Sin(Time.time * vignettePulseSpeed);
+            float pulse = 0.7f + 0.3f * Mathf.Sin(Time.time * vignettePulseSpeed);
 
             // If mask is on, reduce the effect:
             float maskFactor = maskEquipped ? 0.25f : 1f;

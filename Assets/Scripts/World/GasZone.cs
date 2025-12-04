@@ -5,59 +5,72 @@ public class GasZone : MonoBehaviour
 {
     [Header("Radii")]
     [Tooltip("Distance from leak center where maximum danger is felt")]
-    [SerializeField] private float innerRadius = 10;
+    [SerializeField] private float innerRadius = 5f;
 
     [Tooltip("Distance from leak center where gas effect starts")]
-    [SerializeField] private float outerRadius = 25f;
-
-    [Header("Pushback")]
-    [Tooltip("How strongly the player is pushed out of the inner radius when unprotected")]
-    [SerializeField] private float pushBackStrength = 0.5f;
-
-    [Tooltip("Root object of the player (used for pushback)")]
-    [SerializeField] private Transform playerRoot;
+    [SerializeField] private float outerRadius = 10f;
 
     [Header("References")]
     [SerializeField] private Transform leakCenter;
     [SerializeField] private EquipmentController equipmentController;
     [SerializeField] private GasFeedbackController gasFeedbackController;
 
-    private SphereCollider _collider;
+    [Tooltip("Non-trigger collider that physically blocks the player inside the inner radius")]
+    [SerializeField] private SphereCollider innerBlockerCollider;  // isTrigger = false
+
+    private SphereCollider triggerCollider; // outer trigger
 
     private void Reset()
     {
-        _collider = GetComponent<SphereCollider>();
-        _collider.isTrigger = true;
-        _collider.radius = outerRadius;
+        // Outer trigger
+        triggerCollider = GetComponent<SphereCollider>();
+        triggerCollider.isTrigger = true;
+        triggerCollider.radius = outerRadius;
+
+        // Try to auto-create inner blocker as a child if not set
+        if (innerBlockerCollider == null)
+        {
+            GameObject innerObj = new GameObject("InnerBlocker");
+            innerObj.transform.SetParent(transform, false);
+            innerObj.transform.localPosition = Vector3.zero;
+
+            innerBlockerCollider = innerObj.AddComponent<SphereCollider>();
+            innerBlockerCollider.isTrigger = false;
+        }
+
+        innerBlockerCollider.radius = innerRadius;
     }
 
     private void Awake()
     {
-        _collider = GetComponent<SphereCollider>();
-        _collider.isTrigger = true;
+        triggerCollider = GetComponent<SphereCollider>();
+        triggerCollider.isTrigger = true;
+        triggerCollider.radius = outerRadius;
 
         if (leakCenter == null)
             leakCenter = transform;
 
-        if (playerRoot == null)
-        {
-            Debug.LogError("[GasZone] Missing reference: player root");
-        }
+        if (innerBlockerCollider != null)
+            innerBlockerCollider.radius = innerRadius;
 
         if (equipmentController == null)
-        {
             Debug.LogError("[GasZone] Missing reference: equipment controller");
-        }
 
         if (gasFeedbackController == null)
-        {
             Debug.LogError("[GasZone] Missing reference: gas feedback controller");
+    }
+
+    private void Update()
+    {
+        // Wall ON when no mask, OFF when protected
+        if (innerBlockerCollider != null && equipmentController != null)
+        {
+            innerBlockerCollider.enabled = !equipmentController.HasGasProtection;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Identify the player using tag
         if (!other.CompareTag("Player"))
             return;
 
@@ -71,28 +84,13 @@ public class GasZone : MonoBehaviour
             return;
         }
 
-
-        Debug.Log($"!! distance = {distance}");
-        float t = 0f;
-        float clamped = Mathf.Clamp(distance, innerRadius, outerRadius); // restrict to [innerRadius, outerRadius]
-        Debug.Log($"!! clamped distance = {clamped}");
+        // Map [innerRadius, outerRadius] to [0,1]
+        float clamped = Mathf.Clamp(distance, innerRadius, outerRadius);
         float range = outerRadius - innerRadius;
-        t = 1f - ((clamped - innerRadius) / range);
-
-        Debug.Log($"!! final = {t}");
+        float t = 1f - ((clamped - innerRadius) / range);
 
         gasFeedbackController.SetDangerLevel(t);
-
-        if (equipmentController.HasGasProtection)
-            return;
-
-        // Inside inner radius + no protection => pushback
-        /*if (distance <= innerRadius)
-        {
-            Vector3 dir = (playerRoot.position - leakCenter.position).normalized;
-            Vector3 targetPos = leakCenter.position + dir * innerRadius;
-            playerRoot.position = Vector3.Lerp(playerRoot.position, targetPos, Time.deltaTime * pushBackStrength);
-        }*/
+        // NOTE: no pushback here; physical collider handles blocking.
     }
 
     private void OnTriggerExit(Collider other)
@@ -100,7 +98,6 @@ public class GasZone : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        // Leaving the zone => clear danger overlay
         gasFeedbackController.SetDangerLevel(0f);
     }
 }
