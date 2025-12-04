@@ -3,24 +3,26 @@ using UnityEngine;
 public class GasFeedbackController : MonoBehaviour
 {
     [Header("Overlays")]
-    [Tooltip("Overlay for general gas danger (e.g. red tint)")]
-    [SerializeField] private CanvasGroup gasDangerOverlay;
-
     [Tooltip("Overlay shown when mask is equipped (e.g. mask vignette)")]
     [SerializeField] private CanvasGroup maskOverlay;
+    [Tooltip("Overlay for general gas danger (e.g. red tint)")]
+    [SerializeField] private CanvasGroup dangerOverlay;
 
-    [Header("Danger Settings")]
-    [Tooltip("How fast the danger overlay alpha reacts to changes")]
-    [SerializeField] private float dangerLerpSpeed = 5f;
-    [SerializeField] private float dangerWithMaskModifier = 0.3f; // E [0, 1]
+    [Header("Mask Settings")]
+    [SerializeField] private float maskFadeSpeed = 6f;
 
-    private bool _maskEquipped;
-    private float _targetDangerAlpha;
-    private float _currentDangerAlpha;
+    [Header("Danger Vignette Settings")]
+    [SerializeField] private float vignetteMaxAlpha = 0.3f;
+    [SerializeField] private float vignetteFadeSpeed = 7f;
+    [SerializeField] private float vignettePulseSpeed = 1.1f;
+
+    private bool maskEquipped;
+    private float gasIntensity; // 0..1, set by gas zones
+    private float currentVignetteAlpha;
 
     private void Awake()
     {
-        if (gasDangerOverlay == null)
+        if (dangerOverlay == null)
         {
             Debug.LogError("[GasFeedbackController] Missing reference: gas danger overlay");
         }
@@ -33,26 +35,58 @@ public class GasFeedbackController : MonoBehaviour
 
     private void Update()
     {
-        // Smoothly interpolate danger overlay alpha
-        _currentDangerAlpha = Mathf.Lerp(_currentDangerAlpha, _targetDangerAlpha, Time.deltaTime * dangerLerpSpeed);
-
-        gasDangerOverlay.alpha = _currentDangerAlpha;
+        UpdateMaskOverlay();
+        UpdateDangerVignette();
     }
 
+    /// <summary>Call this from your equipment / inventory logic.</summary>
     public void SetMaskEquipped(bool equipped)
     {
-        _maskEquipped = equipped;
-
-        maskOverlay.alpha = equipped ? 1f : 0f;
+        maskEquipped = equipped;
     }
 
     /// <summary>
-    /// dangerLevel in [0, 1].
+    /// Call this from gas zones. intensity is 0..1
+    /// 0 = no gas, 1 = max danger.
     /// </summary>
-    public void SetDangerLevel(float dangerLevel)
+    public void SetDangerLevel(float intensity)
     {
-        // Only dangerous if mask not equipped
-        float effective = _maskEquipped ? dangerWithMaskModifier * dangerLevel : dangerLevel;
-        _targetDangerAlpha = Mathf.Clamp01(effective);
+        gasIntensity = intensity;
+    }
+
+    // --- Internals ---
+
+    private void UpdateMaskOverlay()
+    {
+        float target = maskEquipped ? 1f : 0f;
+        maskOverlay.alpha = Mathf.MoveTowards(
+            maskOverlay.alpha,
+            target,
+            maskFadeSpeed * Time.deltaTime
+        );
+    }
+
+    private void UpdateDangerVignette()
+    {
+        float targetAlpha = 0f;
+
+        if (gasIntensity > 0f)
+        {
+            // Pulse between 0.6 and 1.0 based on time
+            float pulse = 0.6f + 0.4f * Mathf.Sin(Time.time * vignettePulseSpeed);
+
+            // If mask is on, reduce the effect:
+            float maskFactor = maskEquipped ? 0.25f : 1f;
+
+            targetAlpha = gasIntensity * vignetteMaxAlpha * pulse * maskFactor;
+        }
+
+        currentVignetteAlpha = Mathf.MoveTowards(
+            currentVignetteAlpha,
+            targetAlpha,
+            vignetteFadeSpeed * Time.deltaTime
+        );
+
+        dangerOverlay.alpha = currentVignetteAlpha;
     }
 }

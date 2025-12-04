@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5081005798093308178}
   - component: {fileID: 6173729016899146834}
   m_Layer: 0
-  m_Name: gas_bottle_fire
+  m_Name: Gas_Leak_Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
