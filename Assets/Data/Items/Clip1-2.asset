@@ -16,9 +16,10 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: 9890924a4221b6b429c8a7418f2595b5, type: 3}
   descriptionImage: {fileID: 0}
   titleText: Interview with the janitor - Part 2
-  descriptionText: Still, I couldn't have guessed that the leak was simple to stop.
-    If I had known, I could've stopped it myself, since I knew where every piece
-    of equipment is. I can't help but feel guilty for not having done more.
+  descriptionText: Still, the leak would've been difficult to stop, if only it was
+    possible to make the source to disappear. Even if I had known, I couldn't have
+    stopped it myself, which saddens me. Even knowing that, I can't help but feel
+    guilty for not being there, maybe someone could've been saved.
   prefab: {fileID: 0}
   type: 0
   keyId: 
@@ -26,4 +27,3 @@ MonoBehaviour:
   inWorld: 0
   isUsable: 0
   removeFromInventoryOnUse: 1
-  useHandler: {fileID: 0}

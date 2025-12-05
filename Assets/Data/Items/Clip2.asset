@@ -15,9 +15,10 @@ MonoBehaviour:
   id: clip2
   inventoryIcon: {fileID: 21300000, guid: 152e96fbea6f053448a0129ecb4d27a7, type: 3}
   descriptionImage: {fileID: 0}
-  titleText: Students' testimonies
-  descriptionText: Some students tried to open the janitor's locker to get the keys
-    to the laboratories, but they eventually gave up after trying multiple combinations.
+  titleText: Students' actions
+  descriptionText: Some students thought about going to the cleaning storage room,
+    which was next to the front doors. Sadly, in restrospective, even if they had
+    arrived and got the keys, there was simply too much to do.
   prefab: {fileID: 0}
   type: 0
   keyId: 
@@ -25,4 +26,3 @@ MonoBehaviour:
   inWorld: 0
   isUsable: 0
   removeFromInventoryOnUse: 1
-  useHandler: {fileID: 0}

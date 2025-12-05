@@ -17,9 +17,8 @@ MonoBehaviour:
   descriptionImage: {fileID: 0}
   titleText: Security guard's testimony
   descriptionText: When the security guard realized that there was a gas leak, he
-    attempted to reach the source, but sadly the contamination measurement device
-    was inside a locked box inside the storehouse and he couldn't find the code in
-    time. Tragically, he died.
+    attempted to reach the source, but sadly he didn't have the contamination measurement
+    device which was inside the cleaning storehouse. Tragically, he died.
   prefab: {fileID: 0}
   type: 0
   keyId: 
@@ -27,4 +26,3 @@ MonoBehaviour:
   inWorld: 0
   isUsable: 0
   removeFromInventoryOnUse: 1
-  useHandler: {fileID: 0}
