@@ -4,7 +4,8 @@ using UnityEngine;
 public class SimpleLaserPointer : MonoBehaviour
 {
     [Tooltip("How far the laser goes in front of the controller.")]
-    public float length = 2f;
+    [SerializeField] private float length = 2f;
+    [SerializeField] private bool startEnabled = false;
 
     private LineRenderer line;
 
@@ -27,7 +28,7 @@ public class SimpleLaserPointer : MonoBehaviour
             line.material.color = Color.white;
         }
 
-        line.enabled = false;
+        line.enabled = startEnabled;
     }
 
     private void Update()
