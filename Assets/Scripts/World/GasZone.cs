@@ -65,7 +65,7 @@ public class GasZone : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"!! Has gas protection = {equipmentController.HasGasProtection}");
+        //Debug.Log($"!! Has gas protection = {equipmentController.HasGasProtection}");
         // Wall ON when no mask, OFF when protected
         if (innerBlockerCollider != null)
         {
