@@ -36,10 +36,6 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void TogglePause()
-    {
-    }
-
     public void PauseGame()
     {
         if (isPaused) return;

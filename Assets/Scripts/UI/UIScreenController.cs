@@ -57,13 +57,11 @@ public class UIScreenController : MonoBehaviour
         {
             if (pauseMenu.IsPaused)
             {
-                pauseMenu.ResumeGame();
-                SetLaserActive(false);
+                ResumeGame();
             }
             else
             {
-                pauseMenu.PauseGame();
-                SetLaserActive(true);
+                PauseGame();
             }
         }
         else if (pauseMenu.IsPaused)
@@ -91,6 +89,18 @@ public class UIScreenController : MonoBehaviour
             }
             UpdateInventoryScreen(clueInventoryScreen);
         }
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.ResumeGame();
+        SetLaserActive(false);
+    }
+
+    public void PauseGame()
+    {
+        pauseMenu.PauseGame();
+        SetLaserActive(true);
     }
 
     private void UpdateInventoryScreen(InventoryScreenController inventoryScreen)
