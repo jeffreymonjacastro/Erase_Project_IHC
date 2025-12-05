@@ -63,7 +63,7 @@ public class SensorFeedbackController : MonoBehaviour
 
         if (dangerBar == null)
         {
-            Debug.LogWarning("[SensorFeedbackController] Missing reference: danger bar");
+            Debug.LogError("[SensorFeedbackController] Missing reference: danger bar");
         }
 
         if (beepAudio == null)
@@ -108,8 +108,8 @@ public class SensorFeedbackController : MonoBehaviour
 
         titleLabel.text = "Toxic Gas Sensor";
 
-        if (dangerBar != null)
-            dangerBar.fillAmount = norm;
+        Debug.Log($"!! fill amount = {norm}");
+        dangerBar.fillAmount = norm;
 
         Color zoneColor = safeColor;
         switch (measurement.CurrentZoneState)

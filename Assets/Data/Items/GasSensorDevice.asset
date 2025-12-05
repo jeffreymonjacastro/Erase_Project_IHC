@@ -18,7 +18,7 @@ MonoBehaviour:
   titleText: Toxic Gas Sensor
   descriptionText: A device with a sensor that measures the intensity of toxic gas
     in PPM.
-  prefab: {fileID: 2725266458873649327, guid: 88ca66cf230be304b9d1e9e9d9a29efc, type: 3}
+  prefab: {fileID: 4722822982642375200, guid: 88ca66cf230be304b9d1e9e9d9a29efc, type: 3}
   type: 3
   keyId: 
   grantsGasProtection: 0
