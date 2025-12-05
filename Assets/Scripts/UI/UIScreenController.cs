@@ -42,7 +42,7 @@ public class UIScreenController : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.B))
+        if (OVRInput.GetDown(OVRInput.RawButton.Y))
         {
             if (clueInventoryScreen.IsOpen)
             {
@@ -52,7 +52,7 @@ public class UIScreenController : MonoBehaviour
 
             UpdateInventoryScreen(objectInventoryScreen);
         }
-        else if (OVRInput.GetDown(OVRInput.RawButton.Y))
+        else if (OVRInput.GetDown(OVRInput.RawButton.B))
         {
             if (objectInventoryScreen.IsOpen)
             {

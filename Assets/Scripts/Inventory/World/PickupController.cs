@@ -26,7 +26,7 @@ public class HandPickupController : MonoBehaviour
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.A))
+        if (OVRInput.GetDown(OVRInput.RawButton.X))
         {
             TryStoreCurrentItem();
         }
