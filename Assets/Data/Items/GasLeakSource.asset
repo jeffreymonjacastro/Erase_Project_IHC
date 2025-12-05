@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caef6242de90bee46b273625fd45ff73, type: 3}
+  m_Name: GasLeakSource
+  m_EditorClassIdentifier: 
+  id: gas-leak-source
+  inventoryIcon: {fileID: 21300000, guid: f7d83b482f736c44d92a377d55ac68cf, type: 3}
+  descriptionImage: {fileID: 0}
+  titleText: Toxic Gas Cylinder
+  descriptionText: The source of the tragedy that scarred you for life.
+  prefab: {fileID: 7087331393494102835, guid: 462edf81b72594c4abaf4e6cd83b29c2, type: 3}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 1
+  isUsable: 0
+  removeFromInventoryOnUse: 1
