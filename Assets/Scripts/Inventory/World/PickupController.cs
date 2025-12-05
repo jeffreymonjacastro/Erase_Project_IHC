@@ -41,10 +41,25 @@ public class HandPickupController : MonoBehaviour
         Debug.Log("[PickupController] Got object");
         PickupItem pickup = grabbed.GetComponentInParent<PickupItem>();
         if (pickup == null) return;
-
         Debug.Log("[PickupController] Got pickup item");
+
+        GasLeakSource gasLeakSource = pickup.GetComponent<GasLeakSource>();
+        if (gasLeakSource != null)
+        {
+            Debug.Log("[PickupController] Picked up GasLeakSource, triggering finale.");
+            if (EndGameSequenceController.Instance != null)
+            {
+                EndGameSequenceController.Instance.TriggerFinale();
+            }
+            else
+            {
+                Debug.LogWarning("[PickupController] GasLeakSource picked up but no EndGameSequenceController found in scene.");
+            }
+        }
+
         inventory.AddItem(pickup.ItemData);
         Debug.Log("[PickupController] Added to inventory");
+
         Destroy(pickup.gameObject);
         Debug.Log("[PickupController] Destroyed object");
     }
