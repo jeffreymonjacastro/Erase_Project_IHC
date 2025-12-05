@@ -11,8 +11,10 @@ public class IntroSceneController : MonoBehaviour
     [Header("References")]
     [SerializeField] private VideoPlayer videoPlayer;
 
-    [Tooltip("Optional: fade out duration in seconds before changing scene.")]
-    [SerializeField] private float fadeOutDuration = 0.0f;
+    [Header("Fade Settings")]
+    [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private float fadeInDuration = 1.0f;
+    [SerializeField] private float fadeOutDuration = 1.0f;
 
     private bool hasFinishedOrSkipped = false;
 
@@ -25,8 +27,39 @@ public class IntroSceneController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[IntroSceneController] VideoPlayer not assigned.");
+            Debug.LogError("[IntroSceneController]  Missing reference: video player");
         }
+
+        if (fadeCanvasGroup != null)
+        {
+            fadeCanvasGroup.alpha = 1f;
+        }
+        else
+        {
+            Debug.LogError("[IntroSceneController] Missing reference: fade canvas group");
+        }
+
+        if (string.IsNullOrEmpty(nextSceneName))
+        {
+            Debug.LogError("[IntroSceneController] nextSceneName is empty.");
+        }
+    }
+    private void Start()
+    {
+        StartCoroutine(FadeInThenPlay());
+    }
+    private System.Collections.IEnumerator FadeInThenPlay()
+    {
+        // Do fade-in animation
+        if (fadeCanvasGroup != null && fadeInDuration > 0f)
+            yield return Fade(1f, 0f, fadeInDuration);
+        else if (fadeCanvasGroup != null)
+            fadeCanvasGroup.alpha = 0f;
+
+        // Delay one frame to ensure rendering stabilizes
+        yield return null;
+
+        videoPlayer.Play();
     }
 
     private void OnDestroy()
@@ -42,30 +75,49 @@ public class IntroSceneController : MonoBehaviour
         if (!hasFinishedOrSkipped)
         {
             hasFinishedOrSkipped = true;
-            LoadNextScene();
+            StartCoroutine(FadeOutAndLoad());
         }
     }
 
-    // Called by the Skip button
     public void OnSkipPressed()
     {
         if (!hasFinishedOrSkipped)
         {
             hasFinishedOrSkipped = true;
-            LoadNextScene();
+            StartCoroutine(FadeOutAndLoad());
         }
     }
 
-    private void LoadNextScene()
+    private System.Collections.IEnumerator FadeOutAndLoad()
     {
-        if (string.IsNullOrEmpty(nextSceneName))
+        if (fadeOutDuration > 0f)
         {
-            Debug.LogError("[IntroSceneController] nextSceneName is empty, cannot load scene.");
-            return;
+            yield return Fade(0f, 1f, fadeOutDuration);
         }
 
-        // For now, no fade: just load
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    private System.Collections.IEnumerator Fade(float from, float to, float duration)
+    {
+        if (duration <= 0f)
+        {
+            fadeCanvasGroup.alpha = to;
+            yield break;
+        }
+
+        float elapsed = 0f;
+        fadeCanvasGroup.alpha = from;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            fadeCanvasGroup.alpha = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = to;
     }
 
     private void Update()
@@ -76,7 +128,7 @@ public class IntroSceneController : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.RawButton.B))
             {
                 hasFinishedOrSkipped = true;
-                LoadNextScene();
+                StartCoroutine(FadeOutAndLoad());
             }
         }
     }
