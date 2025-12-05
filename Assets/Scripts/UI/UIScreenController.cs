@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class UIScreenController : MonoBehaviour
 {
+    [Header("Menus")]
+    [SerializeField] private PauseMenuController pauseMenu;
 
     [Header("Inventory Screens")]
     [SerializeField] private InventoryScreenController objectInventoryScreen;
@@ -16,9 +19,16 @@ public class UIScreenController : MonoBehaviour
     [Header("Feedback")]
     [SerializeField] private InventoryFeedbackController feedback;
 
+    private int laserToggleCount = 0;
+
 
     void Start()
     {
+        if (pauseMenu == null)
+        {
+            Debug.LogError("[UIScreenController] Missing reference: pause menu");
+        }
+
         if (objectInventoryScreen == null)
         {
             Debug.LogError("[UIScreenController] Missing reference: object inventory screen");
@@ -42,12 +52,31 @@ public class UIScreenController : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.Y))
+        // Left controller "tool menu" / Start button
+        if (OVRInput.GetDown(OVRInput.Button.Start, OVRInput.Controller.LTouch))
+        {
+            if (pauseMenu.IsPaused)
+            {
+                pauseMenu.ResumeGame();
+                SetLaserActive(false);
+            }
+            else
+            {
+                pauseMenu.PauseGame();
+                SetLaserActive(true);
+            }
+        }
+        else if (pauseMenu.IsPaused)
+        {
+            return;
+        }
+        else if (OVRInput.GetDown(OVRInput.RawButton.Y))
         {
             if (clueInventoryScreen.IsOpen)
             {
                 clueInventoryScreen.HideAll();
                 clueInventoryScreen.SetIsOpen(false);
+                SetLaserActive(false);
             }
 
             UpdateInventoryScreen(objectInventoryScreen);
@@ -58,6 +87,7 @@ public class UIScreenController : MonoBehaviour
             {
                 objectInventoryScreen.HideAll();
                 objectInventoryScreen.SetIsOpen(false);
+                SetLaserActive(false);
             }
             UpdateInventoryScreen(clueInventoryScreen);
         }
@@ -85,7 +115,23 @@ public class UIScreenController : MonoBehaviour
     {
         if (laserPointer != null)
         {
-            laserPointer.SetActive(active);
+            if (active)
+            {
+                laserToggleCount++;
+            }
+            else
+            {
+                laserToggleCount--;
+            }
+            
+            if (laserToggleCount == 1)
+            {
+                laserPointer.SetActive(true);
+            }
+            else if (laserToggleCount == 0)
+            {
+                laserPointer.SetActive(false);
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ public class PauseMenuController : MonoBehaviour
 
     private bool isPaused = false;
 
+    public bool IsPaused => isPaused;
+
     private void Awake()
     {
         if (pauseCanvas == null)
@@ -34,16 +36,8 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void Update()
+    public void TogglePause()
     {
-        // Left controller "tool menu" / Start button
-        if (OVRInput.GetDown(OVRInput.Button.Start, OVRInput.Controller.LTouch))
-        {
-            if (isPaused)
-                ResumeGame();
-            else
-                PauseGame();
-        }
     }
 
     public void PauseGame()
