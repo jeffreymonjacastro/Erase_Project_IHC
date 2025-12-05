@@ -22,8 +22,8 @@ public class IntroSceneController : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            // Called when the video reaches its end
             videoPlayer.loopPointReached += OnVideoFinished;
+            videoPlayer.playOnAwake = false;
         }
         else
         {
@@ -46,20 +46,34 @@ public class IntroSceneController : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(FadeInThenPlay());
+        StartCoroutine(PrepareAndFadeIn());
     }
-    private System.Collections.IEnumerator FadeInThenPlay()
+    private System.Collections.IEnumerator PrepareAndFadeIn()
     {
-        // Do fade-in animation
-        if (fadeCanvasGroup != null && fadeInDuration > 0f)
+        videoPlayer.Prepare();
+
+        // Wait until the first frame is ready and shown on the screen
+        while (!videoPlayer.isPrepared)
+        {
+            yield return null;
+        }
+
+        // Now the first frame is visible behind the black panel.
+        // Fade from black to transparent.
+        if (fadeInDuration > 0f)
+        {
             yield return Fade(1f, 0f, fadeInDuration);
-        else if (fadeCanvasGroup != null)
+        }
+        else
+        {
             fadeCanvasGroup.alpha = 0f;
+        }
 
-        // Delay one frame to ensure rendering stabilizes
-        yield return null;
-
-        videoPlayer.Play();
+        // Start video playback AFTER fade-in is done
+        if (videoPlayer != null)
+        {
+            videoPlayer.Play();
+        }
     }
 
     private void OnDestroy()
@@ -75,7 +89,7 @@ public class IntroSceneController : MonoBehaviour
         if (!hasFinishedOrSkipped)
         {
             hasFinishedOrSkipped = true;
-            StartCoroutine(FadeOutAndLoad());
+            StartCoroutine(FadeOutAndLoad(pauseBeforeFade: false));
         }
     }
 
@@ -84,16 +98,29 @@ public class IntroSceneController : MonoBehaviour
         if (!hasFinishedOrSkipped)
         {
             hasFinishedOrSkipped = true;
-            StartCoroutine(FadeOutAndLoad());
+            StartCoroutine(FadeOutAndLoad(pauseBeforeFade: true));
         }
     }
 
-    private System.Collections.IEnumerator FadeOutAndLoad()
+    private System.Collections.IEnumerator FadeOutAndLoad(bool pauseBeforeFade)
     {
+        // Stop video
+        if (pauseBeforeFade && videoPlayer.isPlaying)
+        {
+            videoPlayer.Pause();
+        }
+
+        // Fade out into next scene
         if (fadeOutDuration > 0f)
         {
             yield return Fade(0f, 1f, fadeOutDuration);
         }
+        else
+        {
+            fadeCanvasGroup.alpha = 1f;
+        }
+
+        videoPlayer.Stop();
 
         SceneManager.LoadScene(nextSceneName);
     }
@@ -128,7 +155,7 @@ public class IntroSceneController : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.RawButton.B))
             {
                 hasFinishedOrSkipped = true;
-                StartCoroutine(FadeOutAndLoad());
+                StartCoroutine(FadeOutAndLoad(pauseBeforeFade: true));
             }
         }
     }
