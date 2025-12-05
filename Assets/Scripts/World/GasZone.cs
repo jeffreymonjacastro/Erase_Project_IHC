@@ -1,14 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class GasZone : MonoBehaviour
 {
     [Header("Radii")]
     [Tooltip("Distance from leak center where maximum danger is felt")]
     [SerializeField] private float innerRadius = 5f;
 
+
+    [Tooltip("Distance from leak center where danger starts")]
+    [SerializeField] private float dangerRadius = 10f;
+
     [Tooltip("Distance from leak center where gas effect starts")]
-    [SerializeField] private float outerRadius = 10f;
+    [SerializeField] private float outerRadius = 22f;
+
+    [Header("PPM Settings")]
+    [Tooltip("Ambient CO2-like level when far away.")]
+    [SerializeField] private float ambientPpm = 400f;
+
+    [Tooltip("Max PPM near the leak.")]
+    [SerializeField] private float maxPpm = 5000f;
 
     [Header("References")]
     [SerializeField] private Transform leakCenter;
@@ -18,15 +28,12 @@ public class GasZone : MonoBehaviour
     [Tooltip("Non-trigger collider that physically blocks the player inside the inner radius")]
     [SerializeField] private SphereCollider innerBlockerCollider;  // isTrigger = false
 
-    private SphereCollider triggerCollider; // outer trigger
+    public float InnerRadius => innerRadius;
+    public float DangerRadius => dangerRadius;
+    public float OuterRadius => outerRadius;
 
     private void Reset()
     {
-        // Outer trigger
-        triggerCollider = GetComponent<SphereCollider>();
-        triggerCollider.isTrigger = true;
-        triggerCollider.radius = outerRadius;
-
         // Try to auto-create inner blocker as a child if not set
         if (innerBlockerCollider == null)
         {
@@ -43,10 +50,6 @@ public class GasZone : MonoBehaviour
 
     private void Awake()
     {
-        triggerCollider = GetComponent<SphereCollider>();
-        triggerCollider.isTrigger = true;
-        triggerCollider.radius = outerRadius;
-
         if (leakCenter == null)
             leakCenter = transform;
 
@@ -63,41 +66,36 @@ public class GasZone : MonoBehaviour
     private void Update()
     {
         // Wall ON when no mask, OFF when protected
-        if (innerBlockerCollider != null && equipmentController != null)
+        if (innerBlockerCollider != null)
         {
             innerBlockerCollider.enabled = !equipmentController.HasGasProtection;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    /// <summary>Distance from the provided world position to the leak center.</summary>
+    public float GetDistanceToLeak(Vector3 worldPos)
     {
-        if (!other.CompareTag("Player"))
-            return;
-
-        Vector3 playerPos = other.transform.position;
-        float distance = Vector3.Distance(playerPos, leakCenter.position);
-
-        // Outside outer radius: no effect
-        if (distance > outerRadius)
-        {
-            gasFeedbackController.SetDangerLevel(0f);
-            return;
-        }
-
-        // Map [innerRadius, outerRadius] to [0,1]
-        float clamped = Mathf.Clamp(distance, innerRadius, outerRadius);
-        float range = outerRadius - innerRadius;
-        float t = 1f - ((clamped - innerRadius) / range);
-
-        gasFeedbackController.SetDangerLevel(t);
-        // NOTE: no pushback here; physical collider handles blocking.
+        return Vector3.Distance(worldPos, leakCenter.position);
     }
 
-    private void OnTriggerExit(Collider other)
+    /// <summary>Returns [0,1] normalized concentration based on distance.</summary>
+    public float GetNormalizedConcentration(Vector3 worldPos)
     {
-        if (!other.CompareTag("Player"))
-            return;
+        float d = GetDistanceToLeak(worldPos);
 
-        gasFeedbackController.SetDangerLevel(0f);
+        if (d >= outerRadius) return 0f;
+        if (d <= innerRadius) return 1f;
+
+        // 0 at outerRadius, 1 at innerRadius
+        float t = Mathf.InverseLerp(outerRadius, innerRadius, d);
+        return t;
+    }
+
+    /// <summary>Returns a "realistic-ish" PPM value for the given world position.</summary>
+    public float GetPpmAtPosition(Vector3 worldPos)
+    {
+        float conc = GetNormalizedConcentration(worldPos);
+        float ppm = ambientPpm + conc * (maxPpm - ambientPpm);
+        return ppm;
     }
 }

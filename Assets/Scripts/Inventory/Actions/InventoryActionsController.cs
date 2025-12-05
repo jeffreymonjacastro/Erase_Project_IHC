@@ -17,7 +17,8 @@ public class InventoryActionsController : MonoBehaviour
     [SerializeField] private InventoryController inventory;
     [SerializeField] private EquipmentController equipment;
     [SerializeField] private InventoryScreenController screen;
-    [SerializeField] private InventoryFeedbackController feedback;
+    [SerializeField] private InventoryFeedbackController inventoryFeedback;
+    [SerializeField] private SensorFeedbackController sensorFeedback;
 
     [Header("Usage")]
     [SerializeField] private ItemUseHandlerRegistry handlerRegistry;
@@ -51,9 +52,14 @@ public class InventoryActionsController : MonoBehaviour
             Debug.LogError("[InventoryActionsController] Missing reference: screen controller");
         }
 
-        if (feedback == null)
+        if (inventoryFeedback == null)
         {
-            Debug.LogWarning("[InventoryActionsController] Missing reference: feedback controller");
+            Debug.LogWarning("[InventoryActionsController] Missing reference: inventoryFeedback controller");
+        }
+
+        if (sensorFeedback == null)
+        {
+            Debug.LogError("[InventoryActionsController] Missing reference: sensorFeedback controller");
         }
 
         if (handlerRegistry == null)
@@ -112,7 +118,7 @@ public class InventoryActionsController : MonoBehaviour
     {
         equipment.DropItem(item);
         inventory.RemoveItem(index);
-        feedback?.PlayItemEquippedFeedback();
+        inventoryFeedback?.PlayItemEquippedFeedback();
         screen.HideAll();
     }
 
@@ -124,7 +130,7 @@ public class InventoryActionsController : MonoBehaviour
 
         if (!handler.CanUse(ctx))
         {
-            feedback?.PlayInvalidActionFeedback();
+            inventoryFeedback?.PlayInvalidActionFeedback();
             return;
         }
 
@@ -135,7 +141,7 @@ public class InventoryActionsController : MonoBehaviour
             inventory.RemoveItem(index);
         }
 
-        feedback?.PlayItemEquippedFeedback();
+        inventoryFeedback?.PlayItemEquippedFeedback();
     }
 
     private ItemUseContext BuildUseContext()
@@ -146,7 +152,8 @@ public class InventoryActionsController : MonoBehaviour
             playerCamera = playerCamera,
             equipment = equipment,
             screen = screen,
-            targetedDoorLock = _currentTargetDoor
+            targetedDoorLock = _currentTargetDoor,
+            sensorFeedback = sensorFeedback
         };
     }
 }

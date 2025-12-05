@@ -10,4 +10,5 @@ public struct ItemUseContext
     public InventoryScreenController screen;
     
     public DoorLock targetedDoorLock; // optional for keys
+    public SensorFeedbackController sensorFeedback;
 }

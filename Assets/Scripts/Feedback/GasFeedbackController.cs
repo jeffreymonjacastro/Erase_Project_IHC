@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class GasFeedbackController : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private Transform playerHead;
+    [SerializeField] private GasZone gasZone;
+
     [Header("Overlays")]
     [Tooltip("Overlay shown when mask is equipped (e.g. mask vignette)")]
     [SerializeField] private CanvasGroup maskOverlay;
@@ -12,16 +16,23 @@ public class GasFeedbackController : MonoBehaviour
     [SerializeField] private float maskFadeSpeed = 6f;
 
     [Header("Danger Vignette Settings")]
-    [SerializeField] private float vignetteMaxAlpha = 0.15f;
+    [SerializeField] private float vignetteMaxAlpha = 0.2f;
     [SerializeField] private float vignetteFadeSpeed = 7f;
     [SerializeField] private float vignettePulseSpeed = 0.3f;
 
+    private float minIntensity;
+    private float intensityRange;
+
     private bool maskEquipped;
-    private float gasIntensity; // 0..1, set by gas zones
     private float currentVignetteAlpha;
 
     private void Awake()
     {
+        if (gasZone == null)
+        {
+            Debug.LogError("[GasFeedbackController] Missing reference: gas zone");
+        }
+
         if (dangerOverlay == null)
         {
             Debug.LogError("[GasFeedbackController] Missing reference: gas danger overlay");
@@ -31,6 +42,13 @@ public class GasFeedbackController : MonoBehaviour
         {
             Debug.LogError("[GasFeedbackController] Missing reference: mask overlay");
         }
+    }
+
+    private void Start()
+    {
+        minIntensity = CalculateIntensity(gasZone.InnerRadius);
+        var maxIntensity = CalculateIntensity(gasZone.DangerRadius);
+        intensityRange = maxIntensity - minIntensity;
     }
 
     private void Update()
@@ -43,15 +61,6 @@ public class GasFeedbackController : MonoBehaviour
     public void SetMaskEquipped(bool equipped)
     {
         maskEquipped = equipped;
-    }
-
-    /// <summary>
-    /// Call this from gas zones. intensity is 0..1
-    /// 0 = no gas, 1 = max danger.
-    /// </summary>
-    public void SetDangerLevel(float intensity)
-    {
-        gasIntensity = intensity;
     }
 
     // --- Internals ---
@@ -69,16 +78,21 @@ public class GasFeedbackController : MonoBehaviour
     private void UpdateDangerVignette()
     {
         float targetAlpha = 0f;
+        float d = gasZone.GetDistanceToLeak(playerHead.position);
 
-        if (gasIntensity > 0f)
+        if (d < gasZone.DangerRadius)
         {
             // Pulse between 0.6 and 1.0 based on time
             float pulse = 0.7f + 0.3f * Mathf.Sin(Time.time * vignettePulseSpeed);
 
-            // If mask is on, reduce the effect:
+            // If mask is on, reduce the effect
             float maskFactor = maskEquipped ? 0.25f : 1f;
 
-            targetAlpha = gasIntensity * vignetteMaxAlpha * pulse * maskFactor;
+            // Calculate the intensity
+            float intensity = CalculateIntensity(d);
+            float t = (intensity - minIntensity) / intensityRange;
+
+            targetAlpha = t * vignetteMaxAlpha * pulse * maskFactor;
         }
 
         currentVignetteAlpha = Mathf.MoveTowards(
@@ -88,5 +102,10 @@ public class GasFeedbackController : MonoBehaviour
         );
 
         dangerOverlay.alpha = currentVignetteAlpha;
+    }
+
+    private float CalculateIntensity(float distance)
+    {
+        return distance * distance;
     }
 }
