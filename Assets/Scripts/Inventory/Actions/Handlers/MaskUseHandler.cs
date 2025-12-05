@@ -6,10 +6,8 @@ public class MaskUseHandler : ItemUseHandlerBase
     [Header("Dependencies")]
     public EquipmentController equipment;
 
-    protected override void Awake()
+    protected private void Awake()
     {
-        base.Awake();
-
         if (equipment == null)
         {
             Debug.LogError("[MaskUseHandler] Missing reference: equipment controller");
@@ -28,6 +26,8 @@ public class MaskUseHandler : ItemUseHandlerBase
 
     public override void Use(ItemUseContext ctx)
     {
+        ItemData item = ctx.itemData;
+
         if (equipment.HasGasProtection)
         {
             equipment.UnequipItem(item);

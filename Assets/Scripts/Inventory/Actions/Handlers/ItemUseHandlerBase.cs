@@ -5,17 +5,6 @@ using UnityEngine;
 
 public abstract class ItemUseHandlerBase : MonoBehaviour
 {
-    [Header("Item")]
-    [SerializeField] protected ItemData item;
-
-    protected virtual void Awake()
-    {
-        if (item == null)
-        {
-            Debug.LogError("[ItemUseHandlerBase] Missing reference: item data");
-        }
-    }
-
     /// <summary>
     /// Label to display on the Use button ("Wear", "Take off", "Unlock", etc.).
     /// Return null or empty string to hide / disable the button.

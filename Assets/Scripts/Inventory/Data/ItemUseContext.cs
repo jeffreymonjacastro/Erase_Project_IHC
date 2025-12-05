@@ -8,6 +8,7 @@ public struct ItemUseContext
     public Camera playerCamera;
     public EquipmentController equipment;
     public InventoryScreenController screen;
+    public ItemData itemData;
     
     public DoorLock targetedDoorLock; // optional for keys
     public SensorFeedbackController sensorFeedback;

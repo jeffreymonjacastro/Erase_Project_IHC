@@ -5,12 +5,15 @@ public class KeyUseHandler : ItemUseHandlerBase
 {
     public override string GetLabel(ItemUseContext ctx)
     {
+        ItemData item = ctx.itemData;
         DoorLock door = ctx.targetedDoorLock;
 
         if (door == null)
         {
             return string.Empty;
         }
+
+        Debug.Log($"!! keyId = {item.keyId}, requiredKeyId = {door.RequiredKeyId}");
 
         if (door.RequiredKeyId == item.keyId)
         {
@@ -22,6 +25,7 @@ public class KeyUseHandler : ItemUseHandlerBase
 
     public override bool CanUse(ItemUseContext ctx)
     {
+        ItemData item = ctx.itemData;
         DoorLock door = ctx.targetedDoorLock;
         if (door == null)
             return false;

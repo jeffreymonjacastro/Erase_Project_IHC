@@ -87,7 +87,7 @@ public class InventoryActionsController : MonoBehaviour
         if (item.type == ItemType.Key)
             UpdateTarget();
 
-        return handler.GetLabel(BuildUseContext());
+        return handler.GetLabel(BuildUseContext(item));
     }
 
 
@@ -124,7 +124,7 @@ public class InventoryActionsController : MonoBehaviour
 
     private void HandleUse(ItemData item, int index)
     {
-        var ctx = BuildUseContext();
+        var ctx = BuildUseContext(item);
 
         var handler = handlerRegistry.GetHandlerFor(item);
 
@@ -144,7 +144,7 @@ public class InventoryActionsController : MonoBehaviour
         inventoryFeedback?.PlayItemEquippedFeedback();
     }
 
-    private ItemUseContext BuildUseContext()
+    private ItemUseContext BuildUseContext(ItemData item)
     {
         return new ItemUseContext
         {
@@ -152,6 +152,7 @@ public class InventoryActionsController : MonoBehaviour
             playerCamera = playerCamera,
             equipment = equipment,
             screen = screen,
+            itemData = item,
             targetedDoorLock = _currentTargetDoor,
             sensorFeedback = sensorFeedback
         };
