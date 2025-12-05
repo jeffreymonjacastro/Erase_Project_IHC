@@ -1883,10 +1883,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 50
-    m_Bottom: 50
+    m_Top: 60
+    m_Bottom: 60
   m_ChildAlignment: 1
-  m_Spacing: 150
+  m_Spacing: 120
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -4877,7 +4877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introSceneName: IntroScene
   gameplaySceneName: GameScene
-  skipIntro: 1
+  skipIntro: 0
   mainPanel: {fileID: 35324062}
   settingsPanel: {fileID: 1982954452}
 --- !u!4 &1689762604
