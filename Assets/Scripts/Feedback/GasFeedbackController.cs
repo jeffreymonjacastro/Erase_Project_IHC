@@ -21,6 +21,7 @@ public class GasFeedbackController : MonoBehaviour
     [SerializeField] private float vignettePulseSpeed = 0.3f;
 
     private float minIntensity;
+    private float maxIntensity;
     private float intensityRange;
 
     private bool maskEquipped;
@@ -47,7 +48,7 @@ public class GasFeedbackController : MonoBehaviour
     private void Start()
     {
         minIntensity = CalculateIntensity(gasZone.InnerRadius);
-        var maxIntensity = CalculateIntensity(gasZone.DangerRadius);
+        maxIntensity = CalculateIntensity(gasZone.DangerRadius);
         intensityRange = maxIntensity - minIntensity;
     }
 
@@ -90,7 +91,7 @@ public class GasFeedbackController : MonoBehaviour
 
             // Calculate the intensity
             float intensity = CalculateIntensity(d);
-            float t = (intensity - minIntensity) / intensityRange;
+            float t = (intensityRange - intensity) / intensityRange;
 
             targetAlpha = t * vignetteMaxAlpha * pulse * maskFactor;
         }

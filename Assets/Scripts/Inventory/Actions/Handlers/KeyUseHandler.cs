@@ -13,7 +13,7 @@ public class KeyUseHandler : ItemUseHandlerBase
             return string.Empty;
         }
 
-        Debug.Log($"!! keyId = {item.keyId}, requiredKeyId = {door.RequiredKeyId}");
+        //Debug.Log($"!! keyId = {item.keyId}, requiredKeyId = {door.RequiredKeyId}");
 
         if (door.RequiredKeyId == item.keyId)
         {

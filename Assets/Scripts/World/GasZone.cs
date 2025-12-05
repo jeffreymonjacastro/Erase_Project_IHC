@@ -8,7 +8,7 @@ public class GasZone : MonoBehaviour
 
 
     [Tooltip("Distance from leak center where danger starts")]
-    [SerializeField] private float dangerRadius = 10f;
+    [SerializeField] private float dangerRadius = 14f;
 
     [Tooltip("Distance from leak center where gas effect starts")]
     [SerializeField] private float outerRadius = 22f;
@@ -65,6 +65,7 @@ public class GasZone : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"!! Has gas protection = {equipmentController.HasGasProtection}");
         // Wall ON when no mask, OFF when protected
         if (innerBlockerCollider != null)
         {

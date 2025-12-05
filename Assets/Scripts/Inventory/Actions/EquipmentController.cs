@@ -24,6 +24,8 @@ public class EquipmentController : MonoBehaviour
         {
             Debug.LogError("[EquipmentController] Missing reference: gas feedback");
         }
+
+        HasGasProtection = false;
     }
 
     public void DropItem(ItemData item)

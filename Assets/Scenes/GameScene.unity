@@ -45909,7 +45909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   innerRadius: 5
-  dangerRadius: 10
+  dangerRadius: 14
   outerRadius: 22
   ambientPpm: 400
   maxPpm: 5000
@@ -111537,7 +111537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0725028e289b32942aad128cfbb62c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 1572ce65a0e2433469d28c488e8b4e6e, type: 2}
 --- !u!114 &1882887936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111550,7 +111549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53891b8a0d633be48bad2829b0d3ef9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: d8b2e60448a3a534eb8ae53e241979c4, type: 2}
   equipment: {fileID: 717196950}
 --- !u!114 &1882887937
 MonoBehaviour:
@@ -111579,7 +111577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191e2fedd04d34f4ca8233c8df4cab79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: e284dab3fb20ec449b4af8aff3119b04, type: 2}
 --- !u!1001 &1886523187
 PrefabInstance:
   m_ObjectHideFlags: 0
