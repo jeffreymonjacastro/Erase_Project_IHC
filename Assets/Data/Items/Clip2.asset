@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caef6242de90bee46b273625fd45ff73, type: 3}
+  m_Name: Clip2
+  m_EditorClassIdentifier: 
+  id: clip2
+  inventoryIcon: {fileID: 21300000, guid: 152e96fbea6f053448a0129ecb4d27a7, type: 3}
+  descriptionImage: {fileID: 0}
+  titleText: Students' actions
+  descriptionText: Some students thought about going to the cleaning storage room,
+    which was next to the front doors. Sadly, in restrospective, even if they had
+    arrived and got the keys, there was simply too much to do.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1

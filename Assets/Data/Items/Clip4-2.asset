@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caef6242de90bee46b273625fd45ff73, type: 3}
+  m_Name: Clip4-2
+  m_EditorClassIdentifier: 
+  id: clip4-2
+  inventoryIcon: {fileID: 21300000, guid: 8909e4a3a3aa93349b1aebb3bb76bb62, type: 3}
+  descriptionImage: {fileID: 0}
+  titleText: Interview with Chief Police Officer - Part 2
+  descriptionText: The gas in question was ozone, which was progressively leaked,
+    reaching a deadly level at around 9am. There were reports of students feeling
+    unwell, but the personnel was not able to tie the knots until around 8:50 am
+    (end of first period) and the communication and evacuation wasn't fast enough
+    to avoid casualties.
+  prefab: {fileID: 0}
+  type: 0
+  keyId: 
+  grantsGasProtection: 0
+  inWorld: 0
+  isUsable: 0
+  removeFromInventoryOnUse: 1
+  useHandler: {fileID: 0}
